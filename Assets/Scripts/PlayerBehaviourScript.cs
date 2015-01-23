@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallBehaviourScript : MonoBehaviour {
+public class PlayerBehaviourScript : MonoBehaviour {
 
 	
 	public string left_move_key = "left";
@@ -10,16 +10,14 @@ public class BallBehaviourScript : MonoBehaviour {
 	public const float MAX_MOVE = 12.0f;
 
 
-
-
 	float time_since_move_start;
 	bool moving_left = false;
 	bool moving_right = false;
 	float move_speed = 0.0f;
+
 	void Start () {
 	
 	}
-
 
 	void Update () {
 		if (Input.GetKeyUp (left_move_key)) {
@@ -43,7 +41,7 @@ public class BallBehaviourScript : MonoBehaviour {
 		} else if (moving_left || moving_right) {
 			time_since_move_start += Time.deltaTime;
 			move_speed = Mathf.Clamp01 (time_since_move_start / 0.5f) * 30.0f;
-			if (moving_left) {
+			if (moving_right) {
 					move_speed = -move_speed;
 			}
 			
