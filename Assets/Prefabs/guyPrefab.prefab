@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3331936}
   - 23: {fileID: 2331936}
   m_Layer: 0
-  m_Name: el_kol
+  m_Name: left_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3331938}
   - 23: {fileID: 2331938}
   m_Layer: 0
-  m_Name: el_kol
+  m_Name: right_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 453442}
   - 95: {fileID: 9553442}
+  - 114: {fileID: 11427280}
   m_Layer: 0
   m_Name: guyPrefab
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153442}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
   m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 453440}
@@ -214,6 +215,20 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11427280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f8d4b350d4d5d439e1b82378c45e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left_move_key: left
+  right_move_key: right
+  reversed: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
