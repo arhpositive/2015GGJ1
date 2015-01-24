@@ -1,0 +1,111 @@
+fileFormatVersion: 2
+guid: b32bb9b4ba78247428d526c81e7907c2
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: mountains
+    100002: planet
+    100004: road
+    100006: trees
+    100008: trees_MeshPart0
+    100010: trees_MeshPart1
+    100012: trees_MeshPart2
+    100014: trees_MeshPart3
+    100016: treestones
+    100018: treestones_MeshPart0
+    100020: treestones_MeshPart1
+    100022: //RootNode
+    400000: mountains
+    400002: planet
+    400004: road
+    400006: trees
+    400008: trees_MeshPart0
+    400010: trees_MeshPart1
+    400012: trees_MeshPart2
+    400014: trees_MeshPart3
+    400016: treestones
+    400018: treestones_MeshPart0
+    400020: treestones_MeshPart1
+    400022: //RootNode
+    2300000: mountains
+    2300002: planet
+    2300004: road
+    2300006: trees_MeshPart0
+    2300008: trees_MeshPart1
+    2300010: trees_MeshPart2
+    2300012: trees_MeshPart3
+    2300014: treestones_MeshPart0
+    2300016: treestones_MeshPart1
+    3300000: mountains
+    3300002: planet
+    3300004: road
+    3300006: trees_MeshPart0
+    3300008: trees_MeshPart1
+    3300010: trees_MeshPart2
+    3300012: trees_MeshPart3
+    3300014: treestones_MeshPart0
+    3300016: treestones_MeshPart1
+    4300000: planet
+    4300002: road
+    4300004: trees_MeshPart0
+    4300006: trees_MeshPart1
+    4300008: trees_MeshPart2
+    4300010: trees_MeshPart3
+    4300012: treestones_MeshPart0
+    4300014: treestones_MeshPart1
+    4300016: mountains
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
