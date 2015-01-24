@@ -86,6 +86,7 @@ GameObject:
   - 135: {fileID: 123183356}
   - 23: {fileID: 123183355}
   - 54: {fileID: 123183354}
+  - 114: {fileID: 123183359}
   m_Layer: 0
   m_Name: SpherePrefab
   m_TagString: Untagged
@@ -163,6 +164,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &123183359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123183353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0a62e3b3ca55f4cbaf598b302f5e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186435272
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +523,46 @@ MeshFilter:
   m_PrefabInternal: {fileID: 884315801}
   m_GameObject: {fileID: 487450369}
   m_Mesh: {fileID: 4300000, guid: 5f156b18f5edb6541a6a003b32aa6a7a, type: 3}
+--- !u!1 &489876288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489876290}
+  - 65: {fileID: 489876289}
+  m_Layer: 0
+  m_Name: SceneBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &489876289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 489876288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 10, z: 60}
+  m_Center: {x: 0, y: 4.17999983, z: 0}
+--- !u!4 &489876290
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 489876288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1001 &719372530
 Prefab:
   m_ObjectHideFlags: 0
@@ -820,6 +872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left_move_key: left
   right_move_key: right
+  hit_key: down
   reversed: 1
 --- !u!95 &1031649478
 Animator:
@@ -1002,6 +1055,7 @@ GameObject:
   - 92: {fileID: 1484362710}
   - 124: {fileID: 1484362709}
   - 81: {fileID: 1484362708}
+  - 45: {fileID: 1484362713}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1078,6 +1132,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2042517035}
   m_RootOrder: 0
+--- !u!45 &1484362713
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1484362707}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: da976b1a4f7ebb949b0f71341e4f1821, type: 2}
 --- !u!1 &1495133844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left_move_key: a
   right_move_key: d
+  hit_key: down
   reversed: 0
 --- !u!1 &2042517034
 GameObject:
