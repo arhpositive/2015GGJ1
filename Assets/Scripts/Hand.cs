@@ -34,7 +34,7 @@ public class Hand : MonoBehaviour {
         float distFromHandCenter = (contact.point.x - colliderTopCenter.x);
         float finalX = contact.point.x + distFromHandCenter * distortFactor;
         float planeZSize = 26f;  // TODO: Retrieve these.
-        float finalZ = (planeZSize == contact.point.z ? 0f : planeZSize);
+        float finalZ = (contact.point.z > 0 ? -planeZSize : planeZSize);
 
         
 
@@ -52,9 +52,9 @@ public class Hand : MonoBehaviour {
         float pushPower = 1.0F;
         //pushPower = Mathf.Sqrt(Mathf.Sqrt( numerator / denominator ));
 
-        float dist, voPlanar, vox, voy, voz, duration = 2.0f;
-        vox = Mathf.Abs(destPoint.x - body.position.x) / duration;
-        voz = Mathf.Abs(destPoint.z - body.position.z) / duration;
+        float vox, voy, voz, duration = 2.0f;
+        vox = (destPoint.x - body.position.x) / duration;
+        voz = (destPoint.z - body.position.z) / duration;
         voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
         pushDir = new Vector3(vox, voy, voz);
 

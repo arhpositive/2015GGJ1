@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideRatio: 0
-  distortFactor: 0
+  distortFactor: 3
 --- !u!114 &11476142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideRatio: 0
-  distortFactor: 0
+  distortFactor: 3
 --- !u!114 &11495652
 MonoBehaviour:
   m_ObjectHideFlags: 1
