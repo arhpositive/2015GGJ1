@@ -6,6 +6,8 @@ TagManager:
   - sceneBounds
   - leftGuy
   - rightGuy
+  - UICamera
+  - UI_PlayButton
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
