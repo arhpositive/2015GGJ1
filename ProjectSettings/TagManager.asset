@@ -12,6 +12,7 @@ TagManager:
   - rightArm
   - BallOfSteel
   - Logic
+  - GameUI
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

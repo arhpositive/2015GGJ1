@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+ 
 public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
@@ -82,6 +82,6 @@ public class LogicScript : MonoBehaviour
     {
         // Switch to UI Camera, game mode off
         uiCamera.SetActive(false);
-        mainCamera.SetActive(true);
+		mainCamera.SetActive(true);
     }
 }
