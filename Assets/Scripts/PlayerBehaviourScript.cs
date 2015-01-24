@@ -6,6 +6,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	
 	public string left_move_key = "left";
 	public string right_move_key = "right";
+	public string hit_key = "down";
 	public bool reversed = false;
 	public const float MAX_MOVE = 12.0f;
 
@@ -14,6 +15,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	bool moving_left = false;
 	bool moving_right = false;
 	float move_speed = 0.0f;
+	float hit_start = 0.0f;
+	bool hitting = false;
 
 	void Start () {
 	
@@ -34,6 +37,10 @@ public class PlayerBehaviourScript : MonoBehaviour {
 		if (Input.GetKeyDown (right_move_key)) {
 			moving_right = true;
 			time_since_move_start = 0.0f;
+		}
+		if (Input.GetKeyDown (hit_key)) {
+			hitting = true;
+			hit_start = 0.0f;
 		}
 
 		if (moving_left && moving_right) {
@@ -63,14 +70,30 @@ public class PlayerBehaviourScript : MonoBehaviour {
 		a = Mathf.Sign (a) * Mathf.Pow (Mathf.Abs (a), 2.0f);
 		float left_angle, right_angle;
 		if (a < 0) {
-			left_angle = a * 50.0f;
-			right_angle = a * 30.0f;
+			left_angle = a * 20.0f;
+			right_angle = a * 5.0f;
 		} else {
-			left_angle = a * 30.0f;
-			right_angle = a * 50.0f;
+			left_angle = a * 5.0f;
+			right_angle = a * 20.0f;
 		}
-		
-		transform.FindChild ("left_arm").rotation = Quaternion.AngleAxis(left_angle, Vector3.up) * transform.rotation;
-		transform.FindChild ("right_arm").rotation = Quaternion.AngleAxis(right_angle, Vector3.up) * transform.rotation;
+
+		Quaternion hit_quaternion = Quaternion.identity;
+		if (hitting) {
+			hit_start += Time.deltaTime*8;
+			if(hit_start >= 2.0f){
+				hitting = false;
+			}else{
+				float ang = 0.0f;
+				if(hit_start < 1.0f){
+					ang = (reversed?-1.0f:1.0f)*30.0f * (hit_start);
+				}else{
+					ang = (reversed?-1.0f:1.0f)*30.0f * (2.0f-hit_start);
+				}
+				hit_quaternion = Quaternion.AngleAxis(ang, Vector3.left);
+			}
+		}
+
+		transform.FindChild ("left_arm").rotation = hit_quaternion* Quaternion.AngleAxis(left_angle, Vector3.up) * transform.rotation;
+		transform.FindChild ("right_arm").rotation = hit_quaternion* Quaternion.AngleAxis(right_angle, Vector3.up) * transform.rotation;
 	}
 }
