@@ -4,7 +4,7 @@ using System.Collections;
 public class Hand : MonoBehaviour {
     BoxCollider boxCollider;
     public float distortFactor;
-    public static float zDistFromCenter = 26.0f;
+    public static float zDistFromCenter = 26.8f;
     public static float startDuration = 6.0f;
     public static float accelerationPace = 0.05f;
     public static int scoreBaseAdditionForHit = 50;
@@ -14,7 +14,6 @@ public class Hand : MonoBehaviour {
     float durationLowLimit = 2.0f;
 
     LogicScript logicScript;
-	GameObject logic;
     public static float duration;
 
 	// Use this for initialization
@@ -100,15 +99,12 @@ public class Hand : MonoBehaviour {
                 {
                     if (skillBarValue < 0.1f)
                     {
-                        duration = (1 + (accelerationPace * skillBarValue)) * duration;
+                        duration = (1 + accelerationPace) * duration;
                         print("Good shot! Duration adjusted to: " + duration);
                     }
                     logicScript.increaseComboMultiplier();
                 }                
-            }
-            
-            
-            
+            }            
 
             //HS2: add hand accuracy scores
             int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));

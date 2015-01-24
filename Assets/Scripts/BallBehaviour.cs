@@ -6,6 +6,7 @@ public class BallBehaviour : MonoBehaviour {
     GameObject rightGuy;
 	public Vector3 initial_pos;
 	GameObject logic;
+    Component[] transforms;
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "sceneBounds") {
@@ -30,7 +31,8 @@ public class BallBehaviour : MonoBehaviour {
     {
         gameObject.layer = 8; //reset to leftGuy;
 
-        foreach (Transform tr in leftGuy.transform)
+        transforms = leftGuy.GetComponentsInChildren<Transform>();
+        foreach (Transform tr in transforms)
         {
             if (tr.gameObject.CompareTag("rightArm") == true)
             {
