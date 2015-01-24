@@ -282,6 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left_move_key: a
   right_move_key: d
+  hit_key: s
   reversed: 0
 --- !u!1001 &100100000
 Prefab:
