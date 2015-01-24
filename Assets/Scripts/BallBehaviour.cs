@@ -7,7 +7,7 @@ public class BallBehaviour : MonoBehaviour {
 	public Vector3 initial_pos;
 	GameObject logic;
 
-	void OnTriggerExit(Collider other) {
+	void OnTriggerEnter(Collider other) {
 		if (other.tag == "sceneBounds") {
 			transform.position = initial_pos;
 			rigidbody.velocity = Vector3.zero;
