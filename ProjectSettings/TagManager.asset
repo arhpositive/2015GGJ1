@@ -8,6 +8,8 @@ TagManager:
   - rightGuy
   - UICamera
   - UI_PlayButton
+  - leftArm
+  - rightArm
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

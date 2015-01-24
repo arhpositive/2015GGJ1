@@ -32,7 +32,7 @@ GameObject:
   - 65: {fileID: 6528476}
   m_Layer: 8
   m_Name: right_arm
-  m_TagString: Untagged
+  m_TagString: rightArm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ GameObject:
   - 65: {fileID: 6530198}
   m_Layer: 8
   m_Name: left_arm
-  m_TagString: Untagged
+  m_TagString: leftArm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
