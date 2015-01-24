@@ -11,6 +11,8 @@ public class Hand : MonoBehaviour {
     public static float scoreBaseMultiplierForSpeed = 250.0f;
     public static int scoreBaseAdditionForBarAccuracy = 25;
 
+    float durationLowLimit = 2.0f;
+
     LogicScript logicScript;
 	GameObject logic;
     public static float duration;
@@ -50,6 +52,8 @@ public class Hand : MonoBehaviour {
         {
             logicScript.SwapPlayer();
 
+            float skillBarValue = logicScript.getBarValue();
+
             // Compute destination point.
             ContactPoint contact = collision.contacts[0];
 
@@ -62,11 +66,11 @@ public class Hand : MonoBehaviour {
             float finalX = contact.point.x + distFromHandCenter * distortFactor;
             if (distFromHandCenter < 0.0f)
             {
-                finalX -= logicScript.getBarValue() * distortFactor * 2.0f; 
+                finalX -= skillBarValue * distortFactor * 2.0f; 
             }
             else
             {
-                finalX += logicScript.getBarValue() * distortFactor * 2.0f; 
+                finalX += skillBarValue * distortFactor * 2.0f; 
             }
             float finalZ = (contact.point.z > 0 ? -zDistFromCenter : zDistFromCenter);
             Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
@@ -76,7 +80,30 @@ public class Hand : MonoBehaviour {
             vox = (destPoint.x - body.position.x) / duration;
             voz = (destPoint.z - body.position.z) / duration;
             voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
-            duration = (1 - accelerationPace) * duration;
+
+            if (duration > durationLowLimit)
+            {
+                //adjust duration depending on how successful you were //TODO_ARHAN adjustments needed
+                if (skillBarValue > 0.75f)
+                {
+                    duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
+                    print("Terrible shot! Duration adjusted to: " + duration);
+                }
+                else if (skillBarValue > 0.25f)
+                {
+                    duration = (1 - (accelerationPace * skillBarValue)) * duration;
+                    print("Poor shot! Duration adjusted to: " + duration);
+                }
+                else if (skillBarValue < 0.1f)
+                {
+                    duration = (1 + (accelerationPace * skillBarValue)) * duration;
+                    print("Good shot! Duration adjusted to: " + duration);
+                }
+                
+            }
+            
+            
+            
 
             //HS2: add hand accuracy scores
             int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));
@@ -84,7 +111,7 @@ public class Hand : MonoBehaviour {
             logicScript.AddToHighScore(accuscore); //TODO ARHAN change
 
             //HS3: add hitbar accuracy scores
-            int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - logicScript.getBarValue()));
+            int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - skillBarValue));
             print("hitbar score: " + hitbarscore);
             logicScript.AddToHighScore(hitbarscore);
 
