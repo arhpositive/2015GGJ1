@@ -4,6 +4,7 @@ using System.Collections;
 public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
+    static int comboMultiLimit = 10;
     GameObject mainCamera, uiCamera;
     GameObject leftGuy, rightGuy;
     GameObject ballOfSteel;
@@ -95,6 +96,20 @@ public class LogicScript : MonoBehaviour
     public float getBarValue()
     {
         return bar_value;
+    }
+
+    public void increaseComboMultiplier()
+    {
+        if (comboMultiplier < comboMultiLimit)
+        {
+            comboMultiplier++;
+            print("Combo at " + comboMultiplier + "x!");
+        }        
+    }
+
+    public void resetComboMultiplier()
+    {
+        comboMultiplier = 1;
     }
 
     public void InitiateBouncing()
