@@ -65,6 +65,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 495658}
   - 114: {fileID: 11495652}
+  - 23: {fileID: 2346384}
   m_Layer: 8
   m_Name: leftGuyPrefab
   m_TagString: leftGuy
@@ -123,6 +124,26 @@ Transform:
   - {fileID: 460430}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!23 &2346384
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195658}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!23 &2360430
 Renderer:
   m_ObjectHideFlags: 1
