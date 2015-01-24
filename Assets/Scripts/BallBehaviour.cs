@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class BallBehaviour : MonoBehaviour {
-	Vector3 initial_pos;
 	GameObject camera;
     GameObject leftGuy;
     GameObject rightGuy;
