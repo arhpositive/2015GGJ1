@@ -5,6 +5,7 @@ public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
     GameObject mainCamera, uiCamera;
+    GameObject leftGuy, rightGuy;
     GameObject ballOfSteel;
     bool gameOn;
     int remainingLives;
@@ -22,6 +23,9 @@ public class LogicScript : MonoBehaviour
 	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
         remainingLives = numLives;
         switchToUICamera();
+
+		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
+		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
     }
 
     public void OnDeath()
@@ -41,6 +45,7 @@ public class LogicScript : MonoBehaviour
     public void InitiateBouncing()
     {
         ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
+        ResetHandSpeeds();
         switchToMainCamera();
         gameOn = true;
         ballOfSteel.rigidbody.useGravity = true;
@@ -83,5 +88,16 @@ public class LogicScript : MonoBehaviour
         // Switch to UI Camera, game mode off
         uiCamera.SetActive(false);
         mainCamera.SetActive(true);
+    }
+
+    public void ResetHandSpeeds() {
+        string[] armTags = {"leftArm", "rightArm"};
+        foreach(string s in armTags)
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag(s))
+            {
+                go.GetComponent<Hand>().resetDuration();
+            }
+        }
     }
 }

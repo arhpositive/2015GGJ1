@@ -5,7 +5,7 @@ public class Hand : MonoBehaviour {
     BoxCollider boxCollider;
     public float distortFactor;
     public static float zDistFromCenter = 26.0f;
-    public static float startDuration = 2.0f;
+    public static float startDuration = 5.0f;
     public static float accelerationPace = 0.1f;
     float duration;
 
@@ -56,5 +56,9 @@ public class Hand : MonoBehaviour {
 
         Vector3 pushDir = new Vector3(vox, voy, voz);
         body.velocity = pushDir;
+    }
+
+    public void resetDuration() {
+        duration = startDuration;
     }
 }
