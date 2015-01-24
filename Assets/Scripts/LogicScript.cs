@@ -80,7 +80,8 @@ public class LogicScript : MonoBehaviour
         GameObject playButton = GameObject.FindWithTag("UI_PlayButton");
         //        playButton.guiText.text = "Replay";
         mainCamera.SetActive(false);
-        uiCamera.SetActive(true);
+		uiCamera.SetActive(true);
+		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
     }
 
     void switchToMainCamera()
@@ -88,6 +89,7 @@ public class LogicScript : MonoBehaviour
         // Switch to UI Camera, game mode off
         uiCamera.SetActive(false);
 		mainCamera.SetActive(true);
+		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = true;
     }
 
     public void ResetHandSpeeds() {
