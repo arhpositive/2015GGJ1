@@ -56,8 +56,11 @@ public class LogicScript : MonoBehaviour
 		return current_player;
 	}
 	public void StopBar(){
-		bar_moving = false;
-        print(bar_value);
+        if (bar_moving)
+        {
+            bar_moving = false;
+            print(bar_value);
+        }		
 	}
     public void OnDeath()
     {
@@ -87,6 +90,11 @@ public class LogicScript : MonoBehaviour
     public bool GameIsOn()
     {
         return gameOn;
+    }
+
+    public float getBarValue()
+    {
+        return bar_value;
     }
 
     public void InitiateBouncing()

@@ -9,6 +9,7 @@ public class Hand : MonoBehaviour {
     public static float accelerationPace = 0.05f;
     public static int scoreBaseAdditionForHit = 50;
     public static float scoreBaseMultiplierForSpeed = 250.0f;
+    public static int scoreBaseAdditionForBarAccuracy = 25;
 
     LogicScript logicScript;
 	GameObject logic;
@@ -43,6 +44,7 @@ public class Hand : MonoBehaviour {
         //HS1: add speed scores
         int veloscore = (int)(scoreBaseMultiplierForSpeed / duration);
         print("velo score: " + veloscore);
+        logicScript.AddToHighScore(veloscore);
 
         if (!logicScript.isBarMoving())
         {
@@ -68,13 +70,15 @@ public class Hand : MonoBehaviour {
             voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
             duration = (1 - accelerationPace) * duration;
 
+            //HS2: add hand accuracy scores
             int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));
-
-
-            logicScript.AddToHighScore(veloscore);
-            //HS2: add accuracy scores
             print("accu score: " + accuscore);
             logicScript.AddToHighScore(accuscore); //TODO ARHAN change
+
+            //HS3: add hitbar accuracy scores
+            int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - logicScript.getBarValue()));
+            print("hitbar score: " + hitbarscore);
+            logicScript.AddToHighScore(hitbarscore);
 
             Vector3 pushDir = new Vector3(vox, voy, voz);
             body.velocity = pushDir;
