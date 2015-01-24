@@ -60,6 +60,14 @@ public class Hand : MonoBehaviour {
 
             float distFromHandCenter = (contact.point.x - colliderTopCenter.x);
             float finalX = contact.point.x + distFromHandCenter * distortFactor;
+            if (distFromHandCenter < 0.0f)
+            {
+                finalX -= logicScript.getBarValue() * distortFactor * 2.0f; 
+            }
+            else
+            {
+                finalX += logicScript.getBarValue() * distortFactor * 2.0f; 
+            }
             float finalZ = (contact.point.z > 0 ? -zDistFromCenter : zDistFromCenter);
             Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
 
