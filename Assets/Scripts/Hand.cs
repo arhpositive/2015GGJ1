@@ -5,10 +5,14 @@ public class Hand : MonoBehaviour {
     BoxCollider boxCollider;
     public float distortFactor;
     public static float zDistFromCenter = 26.0f;
+    public static float startDuration = 2.0f;
+    public static float accelerationPace = 0.1f;
+    float duration;
 
 	// Use this for initialization
 	void Start () {
         boxCollider = GetComponent<BoxCollider>();
+        duration = startDuration;
 	}
 	
 	// Update is called once per frame
@@ -44,11 +48,11 @@ public class Hand : MonoBehaviour {
         Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
 
         // Compute velocity vector.
-        float duration = 2.0f; // TODO: dynamically alter duration based on slider action.
         float vox, voy, voz; 
         vox = (destPoint.x - body.position.x) / duration;
         voz = (destPoint.z - body.position.z) / duration;
         voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
+        duration = (1 - accelerationPace) * duration;
 
         Vector3 pushDir = new Vector3(vox, voy, voz);
         body.velocity = pushDir;
