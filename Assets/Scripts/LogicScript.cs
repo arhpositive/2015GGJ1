@@ -126,7 +126,7 @@ public class LogicScript : MonoBehaviour
                     mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, target_quat, max_angle_rot / angle_diff);
                 }
             }
-            mainCamera.transform.position = ballOfSteel.transform.position + mainCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
+            mainCamera.transform.position = ballOfSteel.transform.position + mainCamera.transform.rotation * Vector3.forward * -2.5f + Vector3.up * 1.75f;
         	
 			if (bar_moving) {
 				float bar_move = Mathf.Sin (Time.time * 6.0f);
