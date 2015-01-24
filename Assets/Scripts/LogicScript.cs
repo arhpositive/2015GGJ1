@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
- 
+using UnityEngine.UI;
+
 public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
@@ -19,6 +20,12 @@ public class LogicScript : MonoBehaviour
 	float bar_value;
 	bool bar_moving = false;
 	int current_player;
+	Text scoreText;
+	Text comboText;
+	Text messageText;
+	bool hasMessage = false;
+	float messageTime = 0.0f;
+	float comboTime = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -38,6 +45,10 @@ public class LogicScript : MonoBehaviour
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
 		
+		scoreText = GameObject.Find ("scoreText").GetComponent<Text> ();
+		comboText = GameObject.Find ("comboText").GetComponent<Text> ();
+		messageText = GameObject.Find ("messageText").GetComponent<Text> ();
+
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
 		
@@ -104,16 +115,29 @@ public class LogicScript : MonoBehaviour
         {
             comboMultiplier++;
             print("Combo at " + comboMultiplier + "x!");
-        }        
+		}
+		if (comboMultiplier == 1) {
+			return;
+		}
+
+		comboText.text = "Combo x"+comboMultiplier+" !";
     }
 
     public void resetComboMultiplier()
     {
-        comboMultiplier = 1;
+        comboMultiplier = 0;
+		comboText.text = "";
     }
 
     public void InitiateBouncing()
 	{
+		
+		playerHighScore = 0;
+		comboMultiplier = 0;
+		scoreText.text = "Score : " + playerHighScore;
+		comboText.text = "";
+		hasMessage = false;
+		messageText.text = "";
 		current_player = 1;
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
@@ -148,6 +172,29 @@ public class LogicScript : MonoBehaviour
 				bar.GetComponent<RectTransform> ().localPosition = new Vector3 (0, bar_move * max_bar_move, 0);
 				bar_value = Mathf.Abs (bar_move);
 			}
+
+			if(hasMessage){
+				messageTime += Time.deltaTime;
+			}
+			if(messageTime > 2.0f){
+				hasMessage = false;
+				messageText.text = "";
+			}
+			if(hasMessage){
+				float a = 0.0f;
+				if(messageTime < 0.4f){
+					a = messageTime/0.4f;
+				}else if (messageTime < 1.8f){
+					a = 1.0f;
+				}else{
+					a = (2.0f-messageTime)/0.2f;
+				}
+				
+				Color c = messageText.color;
+				c.a = a;
+				messageText.color = c;
+			}
+
 		}
 	}
 
@@ -189,6 +236,16 @@ public class LogicScript : MonoBehaviour
     public void AddToHighScore(int addition)
     {
         playerHighScore += addition * comboMultiplier;
+		scoreText.text = "Score : " + playerHighScore;
         print(playerHighScore);
     }
+
+	
+	public void DisplayMessage(string message)
+	{
+		messageText.text = message;
+		hasMessage = true;
+		messageTime = 0.0f;
+
+	}
 }
