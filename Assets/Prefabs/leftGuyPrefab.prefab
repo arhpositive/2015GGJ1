@@ -214,8 +214,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.15439987, y: 3.2677002, z: 13.7469006}
-  m_Center: {x: 4.47247559e-14, y: .787050009, z: -6.29444981}
+  m_Size: {x: 5.15439987, y: 3.2677002, z: 5.5}
+  m_Center: {x: 4.47247559e-14, y: .787050009, z: -10.5}
 --- !u!65 &6530198
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -226,8 +226,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.15440083, y: 3.26770043, z: 13.7469044}
-  m_Center: {x: -4.52794808e-07, y: .787050545, z: -6.29445124}
+  m_Size: {x: 5.15440083, y: 3.26770043, z: 5.5}
+  m_Center: {x: -4.76837158e-07, y: .787050247, z: -10.5}
 --- !u!95 &9595652
 Animator:
   serializedVersion: 3
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideRatio: 0
-  distortFactor: 3
+  distortFactor: 6
 --- !u!114 &11476142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideRatio: 0
-  distortFactor: 3
+  distortFactor: 6
 --- !u!114 &11495652
 MonoBehaviour:
   m_ObjectHideFlags: 1
