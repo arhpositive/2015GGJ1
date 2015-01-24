@@ -32,7 +32,7 @@ public class BallBehaviour : MonoBehaviour {
 	}
 
 	public void reset(){
-		myCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, -Vector3.forward);
+		myCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
 
         // Switch to UI Camera, game mode off
         //rigidbody.isKinematic = true;

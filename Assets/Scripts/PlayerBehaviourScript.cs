@@ -78,7 +78,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	            {
 	                time_since_move_start += Time.deltaTime;
 				    move_speed = Mathf.Clamp01 (time_since_move_start / 0.5f) * 30.0f;
-				    if (moving_right) 
+				    if (moving_left) 
 	                {
 				    		move_speed = -move_speed;
 				    }
