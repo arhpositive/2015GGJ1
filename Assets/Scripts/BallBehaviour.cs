@@ -28,7 +28,6 @@ public class BallBehaviour : MonoBehaviour {
 	void Update () {
         bool gameIsOn = logic.GetComponent<LogicScript>().GameIsOn();
         if (gameIsOn) {
-            Camera mainCamera = Camera.main;
             if (Vector3.Cross(rigidbody.velocity, Vector3.up).sqrMagnitude != 0.0f) {
                 Quaternion target_quat = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
 
