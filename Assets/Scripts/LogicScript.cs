@@ -35,8 +35,8 @@ public class LogicScript : MonoBehaviour
 		
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
-
     }
+
 	public void SwapPlayer(){
 		bar_moving = true;
 		if (current_player == 1) {
