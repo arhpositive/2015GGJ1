@@ -4,9 +4,14 @@ using System.Collections;
 public class BallBehaviour : MonoBehaviour {
 	Vector3 initial_pos;
 	GameObject camera;
+    GameObject leftGuy;
+    GameObject rightGuy;
 
 	void OnTriggerExit(Collider other) {
-		if (other.name == "SceneBounds") {
+		if (other.tag == "sceneBounds") {
+            
+            
+
 			transform.position = initial_pos;
 			rigidbody.velocity = Vector3.zero;
 			reset ();
@@ -16,12 +21,14 @@ public class BallBehaviour : MonoBehaviour {
 	void Start () {
 		initial_pos = transform.position;
 		camera = GameObject.Find ("Main Camera");
+        leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
+        rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
+
 		reset ();
 	}
 
 	public void reset(){
 		camera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
-
 	}
 	// Update is called once per frame 
 	void Update () {

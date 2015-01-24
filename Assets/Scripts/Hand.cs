@@ -21,6 +21,15 @@ public class Hand : MonoBehaviour {
         if (body == null || body.isKinematic)
             return;
 
+        if (collision.gameObject.layer == 8)
+        {
+            collision.gameObject.layer = 9;
+        }
+        else if (collision.gameObject.layer == 9)
+        {
+            collision.gameObject.layer = 8;
+        }
+
         // Compute destination point.
         ContactPoint contact = collision.contacts[0];
 
