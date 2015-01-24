@@ -132,7 +132,7 @@ GameObject:
   - 114: {fileID: 11412448}
   m_Layer: 5
   m_Name: game_ui
-  m_TagString: Untagged
+  m_TagString: GameUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -500,9 +500,9 @@ RectTransform:
   - {fileID: 22412434}
   m_Father: {fileID: 22412448}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 550, y: 0}
+  m_AnchorMin: {x: 1, y: .5}
+  m_AnchorMax: {x: 1, y: .5}
+  m_AnchoredPosition: {x: -20, y: 0}
   m_SizeDelta: {x: 20, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22412448
