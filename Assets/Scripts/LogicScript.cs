@@ -9,6 +9,8 @@ public class LogicScript : MonoBehaviour
     GameObject ballOfSteel;
     bool gameOn;
     int remainingLives;
+    int playerHighScore;
+    int comboMultiplier;
 	
 	GameObject bar;
 	float max_bar_move;
@@ -36,6 +38,8 @@ public class LogicScript : MonoBehaviour
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
 
+        playerHighScore = 0;
+        comboMultiplier = 1;
     }
 	public void SwapPlayer(){
 		bar_moving = true;
@@ -140,5 +144,11 @@ public class LogicScript : MonoBehaviour
     public void ResetPlayerPositions() {
         leftGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
         rightGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
+    }
+
+    public void AddToHighScore(int addition)
+    {
+        playerHighScore += addition * comboMultiplier;
+        print(playerHighScore);
     }
 }

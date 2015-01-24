@@ -7,8 +7,9 @@ public class Hand : MonoBehaviour {
     public static float zDistFromCenter = 26.0f;
     public static float startDuration = 5.0f;
     public static float accelerationPace = 0.1f;
+    public static int scoreBaseAdditionForHit = 50;
 
-	
+    LogicScript logicScript;
 	GameObject logic;
     public static float duration;
 
@@ -16,7 +17,7 @@ public class Hand : MonoBehaviour {
 	void Start () {
         boxCollider = GetComponent<BoxCollider>();
 		duration = startDuration;
-		logic = GameObject.FindGameObjectWithTag("Logic");
+        logicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
 	}
 	
 	// Update is called once per frame
@@ -38,7 +39,7 @@ public class Hand : MonoBehaviour {
             collision.gameObject.layer = 8;
         }
 
-		logic.GetComponent<LogicScript> ().SwapPlayer ();
+        logicScript.SwapPlayer();
 
         // Compute destination point.
         ContactPoint contact = collision.contacts[0];
@@ -59,6 +60,8 @@ public class Hand : MonoBehaviour {
         voz = (destPoint.z - body.position.z) / duration;
         voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
         duration = (1 - accelerationPace) * duration;
+
+        logicScript.AddToHighScore(scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor)) ); //TODO ARHAN change
 
         Vector3 pushDir = new Vector3(vox, voy, voz);
         body.velocity = pushDir;
