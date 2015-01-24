@@ -10,21 +10,24 @@ public class BallBehaviour : MonoBehaviour {
     bool gameOn;
 
 	void OnTriggerExit(Collider other) {
-		if (other.tag == "sceneBounds") {			
+		if (other.tag == "sceneBounds") {
+			transform.position = initial_pos;
+			rigidbody.velocity = Vector3.zero;
 			reset ();
+			leftGuy.GetComponent <PlayerBehaviourScript> ().reset();
+			rightGuy.GetComponent <PlayerBehaviourScript> ().reset();
 		}
 	}
     
 	void Start () {
-
 		initial_pos = transform.position;
 		camera = GameObject.Find ("Main Camera");
-        leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
-        rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
+		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
+		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
 
-        // Switch to UI Camera, initiate game mode as off
-        myCamera = GameObject.FindWithTag("MainCamera");
-        uiCamera = GameObject.FindWithTag("UICamera");
+		// Switch to UI Camera, initiate game mode as off
+		myCamera = GameObject.FindWithTag("MainCamera");
+		uiCamera = GameObject.FindWithTag("UICamera");
 		reset ();
 	}
 
@@ -39,7 +42,8 @@ public class BallBehaviour : MonoBehaviour {
         GameObject playButton = GameObject.FindWithTag("UI_PlayButton");
         //playButton.guiText.text = "Replay";
         myCamera.SetActive(false);
-        uiCamera.SetActive(true);
+		uiCamera.SetActive(true);
+
 	}
 
     public void InitiateBouncing()
@@ -51,7 +55,9 @@ public class BallBehaviour : MonoBehaviour {
 //      rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
     }
-
+	public bool IsGameOn(){
+		return gameOn;
+	}
 	// Update is called once per frame 
 	void Update () {
         if (gameOn) {

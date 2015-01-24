@@ -67,7 +67,7 @@ GameObject:
   - 114: {fileID: 11495652}
   m_Layer: 8
   m_Name: leftGuyPrefab
-  m_TagString: Untagged
+  m_TagString: leftGuy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
