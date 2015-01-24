@@ -6,6 +6,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
     public KeyCode playerMoveLeft;
     public KeyCode playerMoveRight;
     public KeyCode playerLaunchBall;
+	public int playerCode;
 	//public bool reversed = false;
     public const float maxMovementSpeed = 12.0f;
 
@@ -65,6 +66,9 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	        if (Input.GetKeyDown(playerLaunchBall))
 	        {
+				if(logic.GetComponent<LogicScript>().getCurrentPlayer() == playerCode){
+					logic.GetComponent<LogicScript>().StopBar();
+				}
 	            //hitting = true;
 	            //hit_start = 0.0f;
 	        }

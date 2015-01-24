@@ -9,6 +9,12 @@ public class LogicScript : MonoBehaviour
     GameObject ballOfSteel;
     bool gameOn;
     int remainingLives;
+	
+	GameObject bar;
+	float max_bar_move;
+	float bar_value;
+	bool bar_moving = true;
+	int current_player;
 
     // Use this for initialization
     void Start()
@@ -26,8 +32,25 @@ public class LogicScript : MonoBehaviour
 
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
-    }
+		
+		bar = GameObject.Find ("bar_arrow");
+		max_bar_move = 90.0f;
 
+    }
+	public void SwapPlayer(){
+		bar_moving = true;
+		if (current_player == 1) {
+			current_player = 2;
+		} else {
+			current_player = 1;
+		}
+	}
+	public int getCurrentPlayer(){
+		return current_player;
+	}
+	public void StopBar(){
+		bar_moving = false;
+	}
     public void OnDeath()
     {
 	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
@@ -43,7 +66,8 @@ public class LogicScript : MonoBehaviour
     }
 
     public void InitiateBouncing()
-    {
+	{
+		current_player = 1;
         ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
         ResetHandSpeeds();
         switchToMainCamera();
@@ -71,7 +95,13 @@ public class LogicScript : MonoBehaviour
                 }
             }
             mainCamera.transform.position = ballOfSteel.transform.position + mainCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
-        }
+        	
+			if (bar_moving) {
+				float bar_move = Mathf.Sin (Time.time * 6.0f);
+				bar.GetComponent<RectTransform> ().localPosition = new Vector3 (0, bar_move * max_bar_move, 0);
+				bar_value = Mathf.Abs (bar_move);
+			}
+		}
 	}
 
     void switchToUICamera()
@@ -85,7 +115,7 @@ public class LogicScript : MonoBehaviour
     }
 
     void switchToMainCamera()
-    {
+	{
         // Switch to UI Camera, game mode off
         uiCamera.SetActive(false);
 		mainCamera.SetActive(true);

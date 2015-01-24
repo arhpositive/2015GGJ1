@@ -296,6 +296,7 @@ MonoBehaviour:
   playerMoveLeft: 276
   playerMoveRight: 275
   playerLaunchBall: 274
+  playerCode: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

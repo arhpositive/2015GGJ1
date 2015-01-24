@@ -7,12 +7,14 @@ public class Hand : MonoBehaviour {
     public static float zDistFromCenter = 26.0f;
     public static float startDuration = 5.0f;
     public static float accelerationPace = 0.1f;
-    float duration;
+	float duration;
+	GameObject logic;
 
 	// Use this for initialization
 	void Start () {
         boxCollider = GetComponent<BoxCollider>();
-        duration = startDuration;
+		duration = startDuration;
+		logic = GameObject.FindGameObjectWithTag("Logic");
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,8 @@ public class Hand : MonoBehaviour {
         {
             collision.gameObject.layer = 8;
         }
+
+		logic.GetComponent<LogicScript> ().SwapPlayer ();
 
         // Compute destination point.
         ContactPoint contact = collision.contacts[0];
