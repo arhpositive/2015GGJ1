@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Hand : MonoBehaviour {
     BoxCollider collider;
-    public float sideRatio;
     public float distortFactor;
 
 	// Use this for initialization
@@ -21,7 +20,7 @@ public class Hand : MonoBehaviour {
         if (body == null || body.isKinematic)
             return;
 
-        // Compute the initial velocity vector.
+        // Compute destination point.
         ContactPoint contact = collision.contacts[0];
         /*
          * Logic below assumes edges of the box collider is parallel to axes.
@@ -30,35 +29,20 @@ public class Hand : MonoBehaviour {
         Vector3 colliderTopCenter;
         colliderTopCenter = transform.position + collider.center;
         colliderTopCenter.y = colliderSize.y / 2;
-        
+
         float distFromHandCenter = (contact.point.x - colliderTopCenter.x);
+        float zDistFromCenter = 26f;  // TODO: Retrieve this from the base size & position.
         float finalX = contact.point.x + distFromHandCenter * distortFactor;
-        float planeZSize = 26f;  // TODO: Retrieve these.
-        float finalZ = (contact.point.z > 0 ? -planeZSize : planeZSize);
-
-        
-
-        // Push the ball.
-        //Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        float finalZ = (contact.point.z > 0 ? -zDistFromCenter : zDistFromCenter);
         Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
-        Vector3 pushDir = new Vector3(finalX, 0, finalZ);
-        pushDir.Normalize();
-        pushDir.y = pushDir.magnitude;
-        pushDir.Normalize();
-        float zDist = Mathf.Abs(finalZ - contact.point.z);
-        float numerator = zDist * zDist * Physics.gravity.magnitude;
-        float denominator = (pushDir.z * pushDir.z * pushDir.y * pushDir.y * body.mass);
 
-        float pushPower = 1.0F;
-        //pushPower = Mathf.Sqrt(Mathf.Sqrt( numerator / denominator ));
-
-        float vox, voy, voz, duration = 2.0f;
+        // Compute velocity vector.
+        float vox, voy, voz, duration = 2.0f; // TODO: dynamically alter duration based on slider action.
         vox = (destPoint.x - body.position.x) / duration;
         voz = (destPoint.z - body.position.z) / duration;
         voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
-        pushDir = new Vector3(vox, voy, voz);
+        Vector3 pushDir = new Vector3(vox, voy, voz);
 
-        body.velocity = pushDir * pushPower;
+        body.velocity = pushDir;
     }
 }
-
