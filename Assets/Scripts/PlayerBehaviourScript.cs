@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerBehaviourScript : MonoBehaviour {
-
+    GameObject logic;
     public KeyCode playerMoveLeft;
     public KeyCode playerMoveRight;
     public KeyCode playerLaunchBall;
@@ -19,6 +19,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	BallBehaviour ballBehaviour;
 
 	void Start () {
+        logic = GameObject.FindWithTag("Logic");
 		initial_pos = transform.position;
 		ballBehaviour = GameObject.Find ("BallPrefab").GetComponent<BallBehaviour> ();
 		reset ();
@@ -35,7 +36,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	}
 
 	void Update () {
-		if(ballBehaviour.IsGameOn()){
+		if(logic.GetComponent<LogicScript>().GameIsOn()){
 	        if (Input.GetKey(playerMoveLeft))
 	        {
 	            if (!moving_left)

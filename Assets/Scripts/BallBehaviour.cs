@@ -2,104 +2,63 @@
 using System.Collections;
 
 public class BallBehaviour : MonoBehaviour {
-	GameObject camera;
     GameObject leftGuy;
     GameObject rightGuy;
 	public Vector3 initial_pos;
-	GameObject myCamera, uiCamera;
-    bool gameOn;
+    GameObject mainCamera;
+	GameObject logic;
 
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "sceneBounds") {
 			transform.position = initial_pos;
 			rigidbody.velocity = Vector3.zero;
-			reset ();
-			leftGuy.GetComponent <PlayerBehaviourScript> ().reset();
-			rightGuy.GetComponent <PlayerBehaviourScript> ().reset();
+			logic.GetComponent <LogicScript> ().OnDeath();
 		}
 	}
     
 	void Start () {
 		initial_pos = transform.position;
-		camera = GameObject.Find ("Main Camera");
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
-
-		// Switch to UI Camera, initiate game mode as off
-		myCamera = GameObject.FindWithTag("MainCamera");
-		uiCamera = GameObject.FindWithTag("UICamera");
-		reset ();
+        logic = GameObject.FindGameObjectWithTag("Logic");
 	}
 
-	public void reset(){
-        ResetBall();
-	    myCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
-
-        // Switch to UI Camera, game mode off
-        //rigidbody.isKinematic = true;
-        rigidbody.useGravity = false;
-        gameOn = false;
-        GameObject playButton = GameObject.FindWithTag("UI_PlayButton");
-        //playButton.guiText.text = "Replay";
-        myCamera.SetActive(false);
-		uiCamera.SetActive(true);
-
-	}
-
-    public void InitiateBouncing()
-    {
-        ResetBall();
-        uiCamera.SetActive(false);
-        myCamera.SetActive(true);
-        gameOn = true;
-//      rigidbody.isKinematic = false;
-        rigidbody.useGravity = true;
-    }
-	public bool IsGameOn(){
-		return gameOn;
-	}
 	// Update is called once per frame 
 	void Update () {
-        if (gameOn) {
+        bool gameIsOn = logic.GetComponent<LogicScript>().GameIsOn();
+        if (gameIsOn) {
+            Camera mainCamera = Camera.main;
             if (Vector3.Cross(rigidbody.velocity, Vector3.up).sqrMagnitude != 0.0f) {
                 Quaternion target_quat = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
 
-                float angle_diff = Quaternion.Angle(myCamera.transform.rotation, target_quat);
+                float angle_diff = Quaternion.Angle(mainCamera.transform.rotation, target_quat);
                 float max_angle_rot = Time.deltaTime * 360;
 
                 if (angle_diff < max_angle_rot)
                 {
-                    myCamera.transform.rotation = target_quat;
+                    mainCamera.transform.rotation = target_quat;
                 }
                 else
                 {
-                    myCamera.transform.rotation = Quaternion.Lerp(myCamera.transform.rotation, target_quat, max_angle_rot / angle_diff);
+                    mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, target_quat, max_angle_rot / angle_diff);
                 }
             }
-            myCamera.transform.position = transform.position + myCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
-        }
-        else {
-//          rigidbody.isKinematic = true;
-            rigidbody.useGravity = false;
+            mainCamera.transform.position = transform.position + mainCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
         }
 	}
 
-    void ResetBall()
+    public void ResetBall()
     {
         gameObject.layer = 8; //reset to leftGuy;
 
         foreach (Transform tr in leftGuy.transform)
         {
-
             if (tr.gameObject.CompareTag("rightArm") == true)
             {
                 //set position of ball slightly above arm
                 BoxCollider boxCollider = (BoxCollider)tr.gameObject.collider;
-
-                
-
                 Vector3 colliderWorldPos = tr.TransformPoint(boxCollider.center);
-
                 transform.position = colliderWorldPos + Vector3.up * 5.0f;
             }
         }
