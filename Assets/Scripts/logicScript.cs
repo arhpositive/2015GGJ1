@@ -48,7 +48,25 @@ public class LogicScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
+        Rigidbody rigidbody = ballOfSteel.rigidbody;
+        if (gameOn) {
+            if (Vector3.Cross(rigidbody.velocity, Vector3.up).sqrMagnitude != 0.0f) {
+                Quaternion target_quat = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+
+                float angle_diff = Quaternion.Angle(mainCamera.transform.rotation, target_quat);
+                float max_angle_rot = Time.deltaTime * 360;
+
+                if (angle_diff < max_angle_rot)
+                {
+                    mainCamera.transform.rotation = target_quat;
+                }
+                else
+                {
+                    mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, target_quat, max_angle_rot / angle_diff);
+                }
+            }
+            mainCamera.transform.position = ballOfSteel.transform.position + mainCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
+        }
 	}
 
     void switchToUICamera()
@@ -63,7 +81,7 @@ public class LogicScript : MonoBehaviour
     void switchToMainCamera()
     {
         // Switch to UI Camera, game mode off
-        mainCamera.SetActive(false);
-        uiCamera.SetActive(true);
+        uiCamera.SetActive(false);
+        mainCamera.SetActive(true);
     }
 }

@@ -5,7 +5,6 @@ public class BallBehaviour : MonoBehaviour {
     GameObject leftGuy;
     GameObject rightGuy;
 	public Vector3 initial_pos;
-    GameObject mainCamera;
 	GameObject logic;
 
 	void OnTriggerExit(Collider other) {
@@ -18,7 +17,6 @@ public class BallBehaviour : MonoBehaviour {
     
 	void Start () {
 		initial_pos = transform.position;
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
         logic = GameObject.FindGameObjectWithTag("Logic");
@@ -26,25 +24,6 @@ public class BallBehaviour : MonoBehaviour {
 
 	// Update is called once per frame 
 	void Update () {
-        bool gameIsOn = logic.GetComponent<LogicScript>().GameIsOn();
-        if (gameIsOn) {
-            if (Vector3.Cross(rigidbody.velocity, Vector3.up).sqrMagnitude != 0.0f) {
-                Quaternion target_quat = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
-
-                float angle_diff = Quaternion.Angle(mainCamera.transform.rotation, target_quat);
-                float max_angle_rot = Time.deltaTime * 360;
-
-                if (angle_diff < max_angle_rot)
-                {
-                    mainCamera.transform.rotation = target_quat;
-                }
-                else
-                {
-                    mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, target_quat, max_angle_rot / angle_diff);
-                }
-            }
-            mainCamera.transform.position = transform.position + mainCamera.transform.rotation * Vector3.forward * -3.5f + Vector3.up * 1.5f;
-        }
 	}
 
     public void ResetBall()

@@ -131,7 +131,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 844830769}
         m_MethodName: InitiateBouncing
         m_Mode: 1
         m_Arguments:
