@@ -7,7 +7,7 @@ public class Hand : MonoBehaviour {
     public static float zDistFromCenter = 26.0f;
     public static float startDuration = 5.0f;
     public static float accelerationPace = 0.1f;
-    float duration;
+    public static float duration;
 
 	// Use this for initialization
 	void Start () {
@@ -58,7 +58,7 @@ public class Hand : MonoBehaviour {
         body.velocity = pushDir;
     }
 
-    public void resetDuration() {
+    public void ResetDuration() {
         duration = startDuration;
     }
 }

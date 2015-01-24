@@ -35,6 +35,10 @@ public class PlayerBehaviourScript : MonoBehaviour {
 		time_since_move_start = 0.0f;
 	}
 
+    public void ResetPosition() {
+        transform.position = initial_pos;
+    }
+
 	void Update () {
 		if(logic.GetComponent<LogicScript>().GameIsOn()){
 	        if (Input.GetKey(playerMoveLeft))

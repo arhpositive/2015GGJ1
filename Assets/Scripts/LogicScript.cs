@@ -22,7 +22,7 @@ public class LogicScript : MonoBehaviour
 
 	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
         remainingLives = numLives;
-        switchToUICamera();
+        SwitchToUICamera();
 
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
@@ -34,7 +34,10 @@ public class LogicScript : MonoBehaviour
         ballOfSteel.rigidbody.useGravity = false;
         gameOn = false;
         --remainingLives;
-        switchToUICamera();
+        ResetPlayerPositions(); // Must be called before resetBall
+        ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
+        ResetHandSpeeds();
+        SwitchToUICamera();
     }
 
     public bool GameIsOn()
@@ -44,9 +47,7 @@ public class LogicScript : MonoBehaviour
 
     public void InitiateBouncing()
     {
-        ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
-        ResetHandSpeeds();
-        switchToMainCamera();
+        SwitchToMainCamera();
         gameOn = true;
         ballOfSteel.rigidbody.useGravity = true;
     }
@@ -74,7 +75,7 @@ public class LogicScript : MonoBehaviour
         }
 	}
 
-    void switchToUICamera()
+    void SwitchToUICamera()
     {
         // Switch to UI Camera, game mode off
         GameObject playButton = GameObject.FindWithTag("UI_PlayButton");
@@ -84,7 +85,7 @@ public class LogicScript : MonoBehaviour
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
     }
 
-    void switchToMainCamera()
+    void SwitchToMainCamera()
     {
         // Switch to UI Camera, game mode off
         uiCamera.SetActive(false);
@@ -93,13 +94,19 @@ public class LogicScript : MonoBehaviour
     }
 
     public void ResetHandSpeeds() {
+        GameObject.FindGameObjectWithTag("rightArm").GetComponent<Hand>().ResetDuration();
         string[] armTags = {"leftArm", "rightArm"};
         foreach(string s in armTags)
         {
             foreach(GameObject go in GameObject.FindGameObjectsWithTag(s))
             {
-                go.GetComponent<Hand>().resetDuration();
+                go.GetComponent<Hand>().ResetDuration();
             }
         }
+    }
+
+    public void ResetPlayerPositions() {
+        leftGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
+        rightGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
     }
 }
