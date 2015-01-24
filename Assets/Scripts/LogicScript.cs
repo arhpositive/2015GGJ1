@@ -7,6 +7,7 @@ public class LogicScript : MonoBehaviour
     GameObject mainCamera, uiCamera;
     GameObject leftGuy, rightGuy;
     GameObject ballOfSteel;
+    BallBehaviour ballBehaviourScript;
     bool gameOn;
     int remainingLives;
     int playerHighScore;
@@ -15,7 +16,7 @@ public class LogicScript : MonoBehaviour
 	GameObject bar;
 	float max_bar_move;
 	float bar_value;
-	bool bar_moving = true;
+	bool bar_moving = false;
 	int current_player;
 
     // Use this for initialization
@@ -24,6 +25,7 @@ public class LogicScript : MonoBehaviour
         // Switch to UI Camera, initiate game mode as off
         ballOfSteel = GameObject.FindGameObjectWithTag("BallOfSteel");
         ballOfSteel.rigidbody.useGravity = false;
+        ballBehaviourScript = ballOfSteel.GetComponent<BallBehaviour>();
 
         mainCamera = GameObject.FindWithTag("MainCamera");
         uiCamera = GameObject.FindWithTag("UICamera");
@@ -55,17 +57,31 @@ public class LogicScript : MonoBehaviour
 	}
 	public void StopBar(){
 		bar_moving = false;
+        print(bar_value);
 	}
     public void OnDeath()
     {
-	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
-        ballOfSteel.rigidbody.useGravity = false;
-        gameOn = false;
         --remainingLives;
+        mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
         ResetPlayerPositions(); // Must be called before resetBall
-        ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
+        ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
-        SwitchToUICamera();
+        if (remainingLives <= 0)
+        {
+            remainingLives = 3;
+            ballOfSteel.rigidbody.useGravity = false;
+            gameOn = false;
+            SwitchToUICamera();
+        }
+        else
+        {
+            bar_moving = false;
+        }
+    }
+
+    public bool isBarMoving()
+    {
+        return bar_moving;
     }
 
     public bool GameIsOn()
@@ -76,7 +92,7 @@ public class LogicScript : MonoBehaviour
     public void InitiateBouncing()
 	{
 		current_player = 1;
-        ballOfSteel.GetComponent<BallBehaviour>().ResetBall();
+        ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
         switchToMainCamera();
         gameOn = true;
