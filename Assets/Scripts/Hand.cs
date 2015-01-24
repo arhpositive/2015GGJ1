@@ -87,12 +87,14 @@ public class Hand : MonoBehaviour {
                 {
                     duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
                     print("Terrible shot! Duration adjusted to: " + duration);
+					logicScript.DisplayMessage("Terrible Shot!");
                     logicScript.resetComboMultiplier();
                 }
                 else if (skillBarValue > 0.25f)
                 {
                     duration = (1 - (accelerationPace * skillBarValue)) * duration;
-                    print("Poor shot! Duration adjusted to: " + duration);
+					print("Poor shot! Duration adjusted to: " + duration);
+					logicScript.DisplayMessage("Poor Shot!");
                     logicScript.resetComboMultiplier();
                 }
                 else
@@ -100,7 +102,8 @@ public class Hand : MonoBehaviour {
                     if (skillBarValue < 0.1f)
                     {
                         duration = (1 + accelerationPace) * duration;
-                        print("Good shot! Duration adjusted to: " + duration);
+						print("Good shot! Duration adjusted to: " + duration);
+						logicScript.DisplayMessage("Good Shot!");
                     }
                     logicScript.increaseComboMultiplier();
                 }                
