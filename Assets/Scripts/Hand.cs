@@ -5,8 +5,8 @@ public class Hand : MonoBehaviour {
     BoxCollider boxCollider;
     public float distortFactor;
     public static float zDistFromCenter = 26.0f;
-    public static float startDuration = 5.0f;
-    public static float accelerationPace = 0.1f;
+    public static float startDuration = 6.0f;
+    public static float accelerationPace = 0.05f;
     public static int scoreBaseAdditionForHit = 50;
     public static float scoreBaseMultiplierForSpeed = 250.0f;
 
