@@ -9,6 +9,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	public int playerCode;
 	//public bool reversed = false;
     public const float maxMovementSpeed = 12.0f;
+    public const float maxAnimSpeed = 3.0f;
+    public const float minAnimSpeed = 1.0f;
 
 	float time_since_move_start;
     bool moving_left, moving_right;
@@ -18,11 +20,13 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	Vector3 initial_pos;
 	
 	BallBehaviour ballBehaviour;
+    Animator animator;
 
 	void Start () {
         logic = GameObject.FindWithTag("Logic");
 		initial_pos = transform.position;
 		ballBehaviour = GameObject.Find ("BallPrefab").GetComponent<BallBehaviour> ();
+        animator = gameObject.GetComponent<Animator>();
 		reset ();
 	}
 
@@ -42,7 +46,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	void Update () {
 		if(logic.GetComponent<LogicScript>().GameIsOn()){
-	        if (Input.GetKey(playerMoveLeft))
+            if (Input.GetKey(playerMoveLeft))
 	        {
 	            if (!moving_left)
 	            {
@@ -110,6 +114,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				x = Mathf.Clamp(x, -maxMovementSpeed, maxMovementSpeed);
 				transform.position = new Vector3(x, transform.position.y, transform.position.z);
 			}
+
+            animator.SetFloat("charSpeed", move_speed);
 			
 	        //float a = (reversed ? -1.0f : 1.0f) * Mathf.Clamp (x / 10.0f, -1.0f, 1.0f);
 	        //a = Mathf.Sign (a) * Mathf.Pow (Mathf.Abs (a), 2.0f);
