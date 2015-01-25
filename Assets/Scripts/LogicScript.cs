@@ -6,7 +6,7 @@ public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
     static int comboMultiLimit = 10;
-    GameObject mainCamera, uiCamera;
+    GameObject mainCamera, uiCamera, helpCamera;
     GameObject leftGuy, rightGuy;
     GameObject ballOfSteel;
     BallBehaviour ballBehaviourScript;
@@ -40,6 +40,7 @@ public class LogicScript : MonoBehaviour
 
         mainCamera = GameObject.FindWithTag("MainCamera");
         uiCamera = GameObject.FindWithTag("UICamera");
+        helpCamera = GameObject.FindWithTag("HelpCamera");
 
 	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
         remainingLives = numLives;
@@ -220,11 +221,10 @@ public class LogicScript : MonoBehaviour
 		}
 	}
 
-    void SwitchToUICamera()
+    public void SwitchToUICamera()
     {
         // Switch to UI Camera, game mode off
-        GameObject playButton = GameObject.FindWithTag("UI_PlayButton");
-        //        playButton.guiText.text = "Replay";
+		helpCamera.SetActive(false);
         mainCamera.SetActive(false);
 		uiCamera.SetActive(true);
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
@@ -233,6 +233,7 @@ public class LogicScript : MonoBehaviour
     void switchToMainCamera()
 	{
         // Switch to UI Camera, game mode off
+		helpCamera.SetActive(false);
         uiCamera.SetActive(false);
 		mainCamera.SetActive(true);
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = true;
@@ -269,4 +270,12 @@ public class LogicScript : MonoBehaviour
 		messageTime = 0.0f;
 
 	}
+
+    public void SwitchToHelpCamera()
+    {
+		mainCamera.SetActive(false);
+		uiCamera.SetActive(false);
+		helpCamera.SetActive(true);
+		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
+    }
 }
