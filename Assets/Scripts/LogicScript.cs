@@ -13,6 +13,7 @@ public class LogicScript : MonoBehaviour
     bool gameOn;
     int remainingLives;
     int playerHighScore;
+    int gameHighScore;
     int comboMultiplier;
 	
 	GameObject bar;
@@ -52,6 +53,7 @@ public class LogicScript : MonoBehaviour
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
 		
+        gameHighScore = 0;
         playerHighScore = 0;
         comboMultiplier = 1;
     }
@@ -87,6 +89,8 @@ public class LogicScript : MonoBehaviour
             remainingLives = 3;
             ballOfSteel.rigidbody.useGravity = false;
             gameOn = false;
+            if(gameHighScore < playerHighScore)
+                gameHighScore = playerHighScore;
             SwitchToUICamera();
         }
         else
@@ -240,7 +244,6 @@ public class LogicScript : MonoBehaviour
 		scoreText.text = "Score : " + playerHighScore;
         print(playerHighScore);
     }
-
 	
 	public void DisplayMessage(string message)
 	{
