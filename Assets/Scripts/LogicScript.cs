@@ -31,10 +31,12 @@ public class LogicScript : MonoBehaviour
 	float messageTime = 0.0f;
 	float comboTime = 0.0f;
 
+	public Color color0, color1;
+
     // Use this for initialization
     void Start()
     {
-        // Switch to UI Camera, initiate game mode as off
+		// Switch to UI Camera, initiate game mode as off
         ballOfSteel = GameObject.FindGameObjectWithTag("BallOfSteel");
         ballOfSteel.rigidbody.useGravity = false;
         ballBehaviourScript = ballOfSteel.GetComponent<BallBehaviour>();
@@ -52,7 +54,6 @@ public class LogicScript : MonoBehaviour
 		
 		scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text> ();
 		livesText = GameObject.FindGameObjectWithTag("LivesText").GetComponent<Text> ();
-		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		comboText = GameObject.Find ("comboText").GetComponent<Text> ();
 		messageText = GameObject.Find ("messageText").GetComponent<Text> ();
@@ -91,9 +92,9 @@ public class LogicScript : MonoBehaviour
 	}
     public void OnDeath()
     {
-        --remainingLives;
+		--remainingLives;
 		livesText.text = "Lives:" + remainingLives.ToString();
-        mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
+		mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
         ResetPlayerPositions(); // Must be called before resetBall
 		current_player = 1;
 		currentPlayerText.text = "Left";
@@ -158,10 +159,11 @@ public class LogicScript : MonoBehaviour
 
     public void InitiateBouncing()
 	{
-		
+		bar_moving = false;
 		playerHighScore = 0;
 		comboMultiplier = 0;
 		scoreText.text = "Score:" + playerHighScore;
+		livesText.text = "Lives:" + 3;
 		comboText.text = "";
 		hasMessage = false;
 		messageText.text = "";
@@ -175,6 +177,9 @@ public class LogicScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		float interpolate = Mathf.Clamp01(ballOfSteel.transform.position.y/50.0f);
+		interpolate = Mathf.Pow (interpolate, 1.2f);
+		//mainCamera.GetComponent<Camera> ().backgroundColor = Color.Lerp(color0, color1, interpolate);
         Rigidbody rigidbody = ballOfSteel.rigidbody;
         if (gameOn) {
             if (Vector3.Cross(rigidbody.velocity, Vector3.up).sqrMagnitude != 0.0f) {
@@ -272,6 +277,7 @@ public class LogicScript : MonoBehaviour
 		messageText.text = message;
 		hasMessage = true;
 		messageTime = 0.0f;
+
 	}
 
     public void SwitchToHelpCamera()
