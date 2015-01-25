@@ -22,6 +22,7 @@ public class LogicScript : MonoBehaviour
 	bool bar_moving = false;
 	int current_player;
 	Text scoreText;
+	Text livesText;
 	Text highScoreText;
 	Text comboText;
 	Text messageText;
@@ -49,6 +50,8 @@ public class LogicScript : MonoBehaviour
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
 		
 		scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text> ();
+		livesText = GameObject.FindGameObjectWithTag("LivesText").GetComponent<Text> ();
+		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		comboText = GameObject.Find ("comboText").GetComponent<Text> ();
 		messageText = GameObject.Find ("messageText").GetComponent<Text> ();
@@ -59,7 +62,7 @@ public class LogicScript : MonoBehaviour
         gameHighScore = 0;
         playerHighScore = 0;
         comboMultiplier = 1;
-		highScoreText.text = "High Score : " + 0;
+		highScoreText.text = "High Score:" + 0;
     }
 
 	public void SwapPlayer(){
@@ -83,9 +86,10 @@ public class LogicScript : MonoBehaviour
     public void OnDeath()
     {
         --remainingLives;
+		livesText.text = "Lives:" + remainingLives.ToString();
         mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
         ResetPlayerPositions(); // Must be called before resetBall
-		current_player = 1;
+        current_player = 1;
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
 		comboMultiplier = 0;
@@ -97,7 +101,7 @@ public class LogicScript : MonoBehaviour
             if (gameHighScore < playerHighScore)
             {
                 gameHighScore = playerHighScore;
-                highScoreText.text = "High Score : " + gameHighScore;
+                highScoreText.text = "High Score:" + gameHighScore;
             }
             SwitchToUICamera();
         }
@@ -150,7 +154,7 @@ public class LogicScript : MonoBehaviour
 		
 		playerHighScore = 0;
 		comboMultiplier = 0;
-		scoreText.text = "Score : " + playerHighScore;
+		scoreText.text = "Score:" + playerHighScore;
 		comboText.text = "";
 		hasMessage = false;
 		messageText.text = "";
@@ -252,7 +256,7 @@ public class LogicScript : MonoBehaviour
     public void AddToHighScore(int addition)
     {
         playerHighScore += addition * comboMultiplier;
-		scoreText.text = "Score : " + playerHighScore;
+		scoreText.text = "Score:" + playerHighScore;
         print(playerHighScore);
     }
 	
@@ -261,7 +265,6 @@ public class LogicScript : MonoBehaviour
 		messageText.text = message;
 		hasMessage = true;
 		messageTime = 0.0f;
-
 	}
 
     public void SwitchToHelpCamera()
