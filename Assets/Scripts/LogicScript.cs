@@ -102,6 +102,7 @@ public class LogicScript : MonoBehaviour
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
 		comboMultiplier = 0;
+		comboText.text = "";
         if (remainingLives <= 0)
         {
             remainingLives = 3;
