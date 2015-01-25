@@ -79,6 +79,7 @@ public class LogicScript : MonoBehaviour
         --remainingLives;
         mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
         ResetPlayerPositions(); // Must be called before resetBall
+		current_player = 1;
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
         if (remainingLives <= 0)
