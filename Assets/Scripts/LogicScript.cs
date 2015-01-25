@@ -13,6 +13,7 @@ public class LogicScript : MonoBehaviour
     bool gameOn;
     int remainingLives;
     int playerHighScore;
+    int gameHighScore;
     int comboMultiplier;
 	
 	GameObject bar;
@@ -21,6 +22,7 @@ public class LogicScript : MonoBehaviour
 	bool bar_moving = false;
 	int current_player;
 	Text scoreText;
+	Text highScoreText;
 	Text comboText;
 	Text messageText;
 	bool hasMessage = false;
@@ -45,15 +47,18 @@ public class LogicScript : MonoBehaviour
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
 		
-		scoreText = GameObject.Find ("scoreText").GetComponent<Text> ();
+		scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text> ();
+		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		comboText = GameObject.Find ("comboText").GetComponent<Text> ();
 		messageText = GameObject.Find ("messageText").GetComponent<Text> ();
 
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
 		
+        gameHighScore = 0;
         playerHighScore = 0;
         comboMultiplier = 1;
+		highScoreText.text = "High Score : " + 0;
     }
 
 	public void SwapPlayer(){
@@ -88,6 +93,11 @@ public class LogicScript : MonoBehaviour
             remainingLives = 3;
             ballOfSteel.rigidbody.useGravity = false;
             gameOn = false;
+            if (gameHighScore < playerHighScore)
+            {
+                gameHighScore = playerHighScore;
+                highScoreText.text = "High Score : " + gameHighScore;
+            }
             SwitchToUICamera();
         }
         else
@@ -244,7 +254,6 @@ public class LogicScript : MonoBehaviour
 		scoreText.text = "Score : " + playerHighScore;
         print(playerHighScore);
     }
-
 	
 	public void DisplayMessage(string message)
 	{
