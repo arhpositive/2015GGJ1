@@ -17,6 +17,7 @@ TagManager:
   - ScoreText
   - HelpCamera
   - LivesText
+  - StaticPNGImage
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
