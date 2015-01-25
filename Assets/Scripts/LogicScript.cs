@@ -25,6 +25,7 @@ public class LogicScript : MonoBehaviour
 	Text highScoreText;
 	Text comboText;
 	Text messageText;
+	Text currentPlayerText;
 	bool hasMessage = false;
 	float messageTime = 0.0f;
 	float comboTime = 0.0f;
@@ -51,6 +52,8 @@ public class LogicScript : MonoBehaviour
 		highScoreText = GameObject.FindGameObjectWithTag("HiScoreText").GetComponent<Text> ();
 		comboText = GameObject.Find ("comboText").GetComponent<Text> ();
 		messageText = GameObject.Find ("messageText").GetComponent<Text> ();
+		currentPlayerText = GameObject.Find ("currentPlayerText").GetComponent<Text> ();
+		
 
 		bar = GameObject.Find ("bar_arrow");
 		max_bar_move = 90.0f;
@@ -59,14 +62,17 @@ public class LogicScript : MonoBehaviour
         playerHighScore = 0;
         comboMultiplier = 1;
 		highScoreText.text = "High Score : " + 0;
+		currentPlayerText.text = "Left";
     }
 
 	public void SwapPlayer(){
 		bar_moving = true;
 		if (current_player == 1) {
 			current_player = 2;
+			currentPlayerText.text = "Right";
 		} else {
 			current_player = 1;
+			currentPlayerText.text = "Left";
 		}
 	}
 	public int getCurrentPlayer(){
@@ -85,6 +91,7 @@ public class LogicScript : MonoBehaviour
         mainCamera.transform.rotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
         ResetPlayerPositions(); // Must be called before resetBall
 		current_player = 1;
+		currentPlayerText.text = "Left";
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
 		comboMultiplier = 0;

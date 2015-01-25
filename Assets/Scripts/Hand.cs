@@ -70,14 +70,14 @@ public class Hand : MonoBehaviour {
 
 				float distFromHandCenter = (ballPos.x - colliderWorldPos.x);
 				float finalX = ballPos.x + distFromHandCenter * distortFactor;
-				if (distFromHandCenter < 0.0f)
+				/*if (distFromHandCenter < 0.0f)
 				{
 					finalX -= skillBarValue * distortFactor * 2.0f; 
 				}
 				else
 				{
 					finalX += skillBarValue * distortFactor * 2.0f; 
-				}
+				}*/
 
 				float min_r = 0.0f + logicScript.getBarValue()*4.0f;
 				float max_r = 2.0f + logicScript.getBarValue()*10.0f;
@@ -95,18 +95,25 @@ public class Hand : MonoBehaviour {
 				vox = (destPoint.x - body.position.x) / duration;
 				voz = (destPoint.z - body.position.z) / duration;
 				voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
-				
+
+				float abs_diff = Mathf.Abs(distFromHandCenter) - 0.2f;
+				if(abs_diff < 0){
+					abs_diff = 0.0f;
+				}
+				abs_diff *= 0.5f;
+				float total_skill = skillBarValue + abs_diff;
+
 				if (duration > durationLowLimit)
 				{
 					//adjust duration depending on how successful you were //TODO_ARHAN adjustments needed
-					if (skillBarValue > 0.75f)
+					if (total_skill > 0.75f)
 					{
 						duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
 						print("Terrible shot! Duration adjusted to: " + duration);
 						logicScript.DisplayMessage("Terrible Shot!");
 						logicScript.resetComboMultiplier();
 					}
-					else if (skillBarValue > 0.25f)
+					else if (total_skill > 0.25f)
 					{
 						duration = (1 - (accelerationPace * skillBarValue)) * duration;
 						print("Poor shot! Duration adjusted to: " + duration);
@@ -115,9 +122,8 @@ public class Hand : MonoBehaviour {
 					}
 					else
 					{
-						if (skillBarValue < 0.1f)
+						if (total_skill < 0.1f)
 						{
-							duration = (1 + accelerationPace) * duration;
 							print("Good shot! Duration adjusted to: " + duration);
 							logicScript.DisplayMessage("Good Shot!");
 						}
