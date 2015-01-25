@@ -718,8 +718,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .150000006, y: .0252999999, z: .0454000011}
-  m_Center: {x: .0749000013, y: -.0753000006, z: .0280000009}
+  m_Size: {x: .0549999997, y: .0252999999, z: .0454000011}
+  m_Center: {x: .119999997, y: -.0753000006, z: .0280000009}
 --- !u!65 &6565122
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -730,8 +730,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .150000006, y: .0252999999, z: .0434000008}
-  m_Center: {x: .0776999965, y: -.0753000006, z: -.00999999978}
+  m_Size: {x: .0549999997, y: .0252999999, z: .0434000008}
+  m_Center: {x: .119999997, y: -.0753000006, z: -.00999999978}
 --- !u!95 &9591982
 Animator:
   serializedVersion: 3
@@ -741,7 +741,7 @@ Animator:
   m_GameObject: {fileID: 191982}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bc9f7ec058201b743883ec3bd369453d, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb726d89750cbd348b5e23a1774e3716, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

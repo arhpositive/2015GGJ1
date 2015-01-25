@@ -74,7 +74,79 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: chara
+        weight: 1
+      - path: chara/highpoly1
+        weight: 1
+      - path: chara/left_arm
+        weight: 1
+      - path: chara/left_arm1
+        weight: 1
+      - path: hip
+        weight: 1
+      - path: hip/lleg
+        weight: 1
+      - path: hip/lleg/lknee
+        weight: 1
+      - path: hip/lleg/lknee/lanke
+        weight: 1
+      - path: hip/lleg/lknee/lanke/lfoottop
+        weight: 1
+      - path: hip/rleg
+        weight: 1
+      - path: hip/rleg/rknee
+        weight: 1
+      - path: hip/rleg/rknee/rankle
+        weight: 1
+      - path: hip/rleg/rknee/rankle/rfoottop
+        weight: 1
+      - path: hip/spine
+        weight: 1
+      - path: hip/spine/spine2
+        weight: 1
+      - path: hip/spine/spine2/neck
+        weight: 1
+      - path: hip/spine/spine2/neck/chin
+        weight: 1
+      - path: hip/spine/spine2/neck/headtop
+        weight: 1
+      - path: hip/spine/spine2/neck/leftcheek
+        weight: 1
+      - path: hip/spine/spine2/neck/lefteye
+        weight: 1
+      - path: hip/spine/spine2/neck/rightcheek
+        weight: 1
+      - path: hip/spine/spine2/neck/righteye
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
