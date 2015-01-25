@@ -79,8 +79,8 @@ public class Hand : MonoBehaviour {
 					finalX += skillBarValue * distortFactor * 2.0f; 
 				}*/
 
-				float min_r = 0.0f + logicScript.getBarValue()*4.0f;
-				float max_r = 2.0f + logicScript.getBarValue()*10.0f;
+				float min_r = 3.0f + logicScript.getBarValue()*3.0f;
+				float max_r = 6.0f + logicScript.getBarValue()*5.0f;
 
 				//revert for old
 				finalX = Random.Range(min_r, max_r);
