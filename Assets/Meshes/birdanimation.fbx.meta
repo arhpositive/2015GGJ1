@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: 9e958de627c4584469cadf2acde0a54a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: biiird
+    100002: bird
+    100004: bird22
+    100006: bird23
+    100008: bird24
+    100010: bird25
+    100012: bird26
+    100014: bird27
+    100016: bird28
+    100018: //RootNode
+    100020: Lwing29
+    100022: Lwing30
+    100024: Lwing31
+    100026: Lwing32
+    100028: Lwing33
+    100030: Lwing34
+    100032: Lwing35
+    100034: Rwing29
+    100036: Rwing30
+    100038: Rwing31
+    100040: Rwing32
+    100042: Rwing33
+    100044: Rwing34
+    100046: Rwing35
+    400000: biiird
+    400002: bird
+    400004: bird22
+    400006: bird23
+    400008: bird24
+    400010: bird25
+    400012: bird26
+    400014: bird27
+    400016: bird28
+    400018: //RootNode
+    400020: Lwing29
+    400022: Lwing30
+    400024: Lwing31
+    400026: Lwing32
+    400028: Lwing33
+    400030: Lwing34
+    400032: Lwing35
+    400034: Rwing29
+    400036: Rwing30
+    400038: Rwing31
+    400040: Rwing32
+    400042: Rwing33
+    400044: Rwing34
+    400046: Rwing35
+    4300000: bird
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: bird
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: biiird
+        weight: 1
+      - path: biiird/bird22
+        weight: 1
+      - path: biiird/bird23
+        weight: 1
+      - path: biiird/bird23/bird24
+        weight: 1
+      - path: biiird/bird23/bird24/bird25
+        weight: 1
+      - path: biiird/bird26
+        weight: 1
+      - path: biiird/bird26/bird27
+        weight: 1
+      - path: biiird/bird26/bird27/bird28
+        weight: 1
+      - path: biiird/Lwing29
+        weight: 1
+      - path: biiird/Lwing29/Lwing30
+        weight: 1
+      - path: biiird/Lwing29/Lwing30/Lwing31
+        weight: 1
+      - path: biiird/Lwing29/Lwing30/Lwing31/Lwing32
+        weight: 1
+      - path: biiird/Lwing29/Lwing30/Lwing31/Lwing32/Lwing33
+        weight: 1
+      - path: biiird/Lwing29/Lwing30/Lwing31/Lwing32/Lwing33/Lwing34
+        weight: 1
+      - path: biiird/Lwing29/Lwing30/Lwing31/Lwing32/Lwing33/Lwing34/Lwing35
+        weight: 1
+      - path: biiird/Rwing29
+        weight: 1
+      - path: biiird/Rwing29/Rwing30
+        weight: 1
+      - path: biiird/Rwing29/Rwing30/Rwing31
+        weight: 1
+      - path: biiird/Rwing29/Rwing30/Rwing31/Rwing32
+        weight: 1
+      - path: biiird/Rwing29/Rwing30/Rwing31/Rwing32/Rwing33
+        weight: 1
+      - path: biiird/Rwing29/Rwing30/Rwing31/Rwing32/Rwing33/Rwing34
+        weight: 1
+      - path: biiird/Rwing29/Rwing30/Rwing31/Rwing32/Rwing33/Rwing34/Rwing35
+        weight: 1
+      - path: bird
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
