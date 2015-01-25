@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 1, y: 8, z: -27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 14a9834d54f8db945a45f4f0e4835b4b, type: 2}
+  - {fileID: 2100000, guid: 2b3ba54e36cc0494bb9827419d4b06dc, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -58,7 +58,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123862}
-  m_Mesh: {fileID: 4300000, guid: cd0d00f152f5375428f7b268da767333, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7a4c128de04cd964995456ba494e5aaa, type: 3}
 --- !u!54 &5423862
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -85,7 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0a62e3b3ca55f4cbaf598b302f5e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initial_pos: {x: 2, y: 8, z: -26}
 --- !u!135 &13523862
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -93,7 +92,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123862}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5

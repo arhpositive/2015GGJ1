@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: ca5c9dfe3aeea9145a2a8816f86dfd43
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: dog1
+    100002: dog10
+    100004: dog11
+    100006: dog12
+    100008: dog13
+    100010: dog14
+    100012: dog15
+    100014: dog16
+    100016: dog17
+    100018: dog18
+    100020: dog19
+    100022: dog2
+    100024: dog20
+    100026: dog3
+    100028: dog4
+    100030: dog5
+    100032: dog6
+    100034: dog7
+    100036: dog8
+    100038: dog8 1
+    100040: dog9
+    100042: dog9 1
+    100044: //RootNode
+    100046: dogretard
+    400000: dog1
+    400002: dog10
+    400004: dog11
+    400006: dog12
+    400008: dog13
+    400010: dog14
+    400012: dog15
+    400014: dog16
+    400016: dog17
+    400018: dog18
+    400020: dog19
+    400022: dog2
+    400024: dog20
+    400026: dog3
+    400028: dog4
+    400030: dog5
+    400032: dog6
+    400034: dog7
+    400036: dog8
+    400038: dog8 1
+    400040: dog9
+    400042: dog9 1
+    400044: //RootNode
+    400046: dogretard
+    4300000: dogretard
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: dogretard
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: dog10
+        weight: 1
+      - path: dog10/dog1
+        weight: 1
+      - path: dog10/dog1/dog2
+        weight: 1
+      - path: dog10/dog1/dog2/dog3
+        weight: 1
+      - path: dog10/dog1/dog2/dog3/dog4
+        weight: 1
+      - path: dog10/dog1/dog2/dog3/dog4/dog5
+        weight: 1
+      - path: dog10/dog1/dog2/dog3/dog4/dog5/dog6
+        weight: 1
+      - path: dog10/dog11
+        weight: 1
+      - path: dog10/dog11/dog7
+        weight: 1
+      - path: dog10/dog11/dog7/dog8 1
+        weight: 1
+      - path: dog10/dog11/dog7/dog8 1/dog9 1
+        weight: 1
+      - path: dog10/dog11/dog12
+        weight: 1
+      - path: dog10/dog11/dog12/dog18
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog13
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog13/dog14
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog13/dog14/dog15
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog16
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog16/dog17
+        weight: 1
+      - path: dog10/dog11/dog12/dog18/dog19
+        weight: 1
+      - path: dog10/dog11/dog20
+        weight: 1
+      - path: dog10/dog11/dog20/dog8
+        weight: 1
+      - path: dog10/dog11/dog20/dog8/dog9
+        weight: 1
+      - path: dogretard
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
