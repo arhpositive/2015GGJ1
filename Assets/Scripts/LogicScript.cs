@@ -82,6 +82,7 @@ public class LogicScript : MonoBehaviour
 		current_player = 1;
         ballBehaviourScript.ResetBall();
         ResetHandSpeeds();
+		comboMultiplier = 0;
         if (remainingLives <= 0)
         {
             remainingLives = 3;
@@ -92,6 +93,9 @@ public class LogicScript : MonoBehaviour
         else
         {
             bar_moving = false;
+			bar_value = 0.0f;
+			
+			bar.GetComponent<RectTransform> ().localPosition = new Vector3 (0, 0, 0);
         }
     }
 
@@ -126,7 +130,7 @@ public class LogicScript : MonoBehaviour
 
     public void resetComboMultiplier()
     {
-        comboMultiplier = 0;
+        comboMultiplier = 1;
 		comboText.text = "";
     }
 
@@ -230,8 +234,8 @@ public class LogicScript : MonoBehaviour
     }
 
     public void ResetPlayerPositions() {
-        leftGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
-        rightGuy.GetComponent<PlayerBehaviourScript>().ResetPosition();
+        leftGuy.GetComponent<PlayerBehaviourScript>().reset();
+        rightGuy.GetComponent<PlayerBehaviourScript>().reset();
     }
 
     public void AddToHighScore(int addition)

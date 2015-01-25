@@ -27,104 +27,219 @@ public class Hand : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	public void OnTriggerEnter(Collider other) {
 
-    void OnCollisionEnter(Collision collision) {
-        Rigidbody body = collision.gameObject.rigidbody;
-        if (body == null || body.isKinematic)
-            return;
+		if (other.gameObject.layer != gameObject.layer) {
+			return;
+		}
+		if (other.gameObject.tag == "BallOfSteel") {
+			Rigidbody body = other.gameObject.rigidbody;
+			if (body == null || body.isKinematic)
+				return;
+			
+			if (other.gameObject.layer == 8)
+			{
+				other.gameObject.layer = 9;
+			}
+			else if (other.gameObject.layer == 9)
+			{
+				other.gameObject.layer = 8;
+			}
+			
+			//HS1: add speed scores
+			int veloscore = (int)(scoreBaseMultiplierForSpeed / duration);
+			print("velo score: " + veloscore);
+			logicScript.AddToHighScore(veloscore);
+			
+			if (!logicScript.isBarMoving())
+			{
+				transform.parent.gameObject.GetComponent<PlayerBehaviourScript>().StartHitAnim();
+				logicScript.SwapPlayer();
+				
+				float skillBarValue = logicScript.getBarValue();
+				
+				// Compute destination point.
+				Vector3 ballPos = other.gameObject.transform.position;
 
-        if (collision.gameObject.layer == 8)
-        {
-            collision.gameObject.layer = 9;
-        }
-        else if (collision.gameObject.layer == 9)
-        {
-            collision.gameObject.layer = 8;
-        }
+				BoxCollider boxCollider = (BoxCollider)gameObject.collider;
+				Vector3 colliderWorldPos = transform.TransformPoint(boxCollider.center);
 
-        //HS1: add speed scores
-        int veloscore = (int)(scoreBaseMultiplierForSpeed / duration);
-        print("velo score: " + veloscore);
-        logicScript.AddToHighScore(veloscore);
+				float distFromHandCenter = (ballPos.x - colliderWorldPos.x);
+				float finalX = ballPos.x + distFromHandCenter * distortFactor;
+				if (distFromHandCenter < 0.0f)
+				{
+					finalX -= skillBarValue * distortFactor * 2.0f; 
+				}
+				else
+				{
+					finalX += skillBarValue * distortFactor * 2.0f; 
+				}
 
-        if (!logicScript.isBarMoving())
-        {
-            logicScript.SwapPlayer();
+				float min_r = 0.0f + logicScript.getBarValue()*4.0f;
+				float max_r = 2.0f + logicScript.getBarValue()*10.0f;
 
-            float skillBarValue = logicScript.getBarValue();
+				//revert for old
+				finalX = Random.Range(min_r, max_r);
+				if(Random.Range(0.0f, 1.0f) < 0.5f){
+					finalX = -finalX;
+				}
 
-            // Compute destination point.
-            ContactPoint contact = collision.contacts[0];
-
-            Vector3 colliderSize = Vector3.Scale(transform.localScale, boxCollider.size);
-            Vector3 colliderTopCenter;
-            colliderTopCenter = transform.position + boxCollider.center;
-            colliderTopCenter.y = colliderSize.y / 2;
-
-            float distFromHandCenter = (contact.point.x - colliderTopCenter.x);
-            float finalX = contact.point.x + distFromHandCenter * distortFactor;
-            if (distFromHandCenter < 0.0f)
-            {
-                finalX -= skillBarValue * distortFactor * 2.0f; 
-            }
-            else
-            {
-                finalX += skillBarValue * distortFactor * 2.0f; 
-            }
-            float finalZ = (contact.point.z > 0 ? -zDistFromCenter : zDistFromCenter);
-            Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
-
-            // Compute velocity vector.
-            float vox, voy, voz;
-            vox = (destPoint.x - body.position.x) / duration;
-            voz = (destPoint.z - body.position.z) / duration;
-            voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
-
-            if (duration > durationLowLimit)
-            {
-                //adjust duration depending on how successful you were //TODO_ARHAN adjustments needed
-                if (skillBarValue > 0.75f)
-                {
-                    duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
-                    print("Terrible shot! Duration adjusted to: " + duration);
+				float finalZ = (ballPos.z > 0 ? -zDistFromCenter : zDistFromCenter);
+				Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
+				// Compute velocity vector.
+				float vox, voy, voz;
+				vox = (destPoint.x - body.position.x) / duration;
+				voz = (destPoint.z - body.position.z) / duration;
+				voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
+				
+				if (duration > durationLowLimit)
+				{
+					//adjust duration depending on how successful you were //TODO_ARHAN adjustments needed
+					if (skillBarValue > 0.75f)
+					{
+						duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
+						print("Terrible shot! Duration adjusted to: " + duration);
+						logicScript.DisplayMessage("Terrible Shot!");
+						logicScript.resetComboMultiplier();
+					}
+					else if (skillBarValue > 0.25f)
+					{
+						duration = (1 - (accelerationPace * skillBarValue)) * duration;
+						print("Poor shot! Duration adjusted to: " + duration);
+						logicScript.DisplayMessage("Poor Shot!");
+						logicScript.resetComboMultiplier();
+					}
+					else
+					{
+						if (skillBarValue < 0.1f)
+						{
+							duration = (1 + accelerationPace) * duration;
+							print("Good shot! Duration adjusted to: " + duration);
+							logicScript.DisplayMessage("Good Shot!");
+						}
+						logicScript.increaseComboMultiplier();
+					}                
+				}            
+				
+				//HS2: add hand accuracy scores
+				int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));
+				print("accu score: " + accuscore);
+				logicScript.AddToHighScore(accuscore); //TODO ARHAN change
+				
+				//HS3: add hitbar accuracy scores
+				int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - skillBarValue));
+				print("hitbar score: " + hitbarscore);
+				logicScript.AddToHighScore(hitbarscore);
+				
+				Vector3 pushDir = new Vector3(vox, voy, voz);
+				body.velocity = pushDir;
+			}else{
+				float randAng = Random.Range(0.0f, 360.0f);
+				body.velocity = new Vector3(Mathf.Cos (randAng)*2.0f, 0, Mathf.Sin (randAng)*2.0f);
+			}
+		}
+		
+	}
+	
+	void OnCollisionEnter(Collision collision) {
+		/*Rigidbody body = collision.gameObject.rigidbody;
+		if (body == null || body.isKinematic)
+			return;
+		
+		if (collision.gameObject.layer == 8)
+		{
+			collision.gameObject.layer = 9;
+		}
+		else if (collision.gameObject.layer == 9)
+		{
+			collision.gameObject.layer = 8;
+		}
+		
+		//HS1: add speed scores
+		int veloscore = (int)(scoreBaseMultiplierForSpeed / duration);
+		print("velo score: " + veloscore);
+		logicScript.AddToHighScore(veloscore);
+		
+		if (!logicScript.isBarMoving())
+		{
+			logicScript.SwapPlayer();
+			
+			float skillBarValue = logicScript.getBarValue();
+			
+			// Compute destination point.
+			ContactPoint contact = collision.contacts[0];
+			
+			Vector3 colliderSize = Vector3.Scale(transform.localScale, boxCollider.size);
+			Vector3 colliderTopCenter;
+			colliderTopCenter = transform.position + boxCollider.center;
+			colliderTopCenter.y = colliderSize.y / 2;
+			
+			float distFromHandCenter = (contact.point.x - colliderTopCenter.x);
+			float finalX = contact.point.x + distFromHandCenter * distortFactor;
+			if (distFromHandCenter < 0.0f)
+			{
+				finalX -= skillBarValue * distortFactor * 2.0f; 
+			}
+			else
+			{
+				finalX += skillBarValue * distortFactor * 2.0f; 
+			}
+			float finalZ = (contact.point.z > 0 ? -zDistFromCenter : zDistFromCenter);
+			Vector3 destPoint = new Vector3(finalX, body.position.y, finalZ);
+			
+			// Compute velocity vector.
+			float vox, voy, voz;
+			vox = (destPoint.x - body.position.x) / duration;
+			voz = (destPoint.z - body.position.z) / duration;
+			voy = (0.5f * duration * duration * Physics.gravity.magnitude) / duration;
+			
+			if (duration > durationLowLimit)
+			{
+				//adjust duration depending on how successful you were //TODO_ARHAN adjustments needed
+				if (skillBarValue > 0.75f)
+				{
+					duration = (1 - (accelerationPace * skillBarValue * 2.0f)) * duration;
+					print("Terrible shot! Duration adjusted to: " + duration);
 					logicScript.DisplayMessage("Terrible Shot!");
-                    logicScript.resetComboMultiplier();
-                }
-                else if (skillBarValue > 0.25f)
-                {
-                    duration = (1 - (accelerationPace * skillBarValue)) * duration;
+					logicScript.resetComboMultiplier();
+				}
+				else if (skillBarValue > 0.25f)
+				{
+					duration = (1 - (accelerationPace * skillBarValue)) * duration;
 					print("Poor shot! Duration adjusted to: " + duration);
 					logicScript.DisplayMessage("Poor Shot!");
-                    logicScript.resetComboMultiplier();
-                }
-                else
-                {
-                    if (skillBarValue < 0.1f)
-                    {
-                        duration = (1 + accelerationPace) * duration;
+					logicScript.resetComboMultiplier();
+				}
+				else
+				{
+					if (skillBarValue < 0.1f)
+					{
+						duration = (1 + accelerationPace) * duration;
 						print("Good shot! Duration adjusted to: " + duration);
 						logicScript.DisplayMessage("Good Shot!");
-                    }
-                    logicScript.increaseComboMultiplier();
-                }                
-            }            
+					}
+					logicScript.increaseComboMultiplier();
+				}                
+			}            
+			
+			//HS2: add hand accuracy scores
+			int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));
+			print("accu score: " + accuscore);
+			logicScript.AddToHighScore(accuscore); //TODO ARHAN change
+			
+			//HS3: add hitbar accuracy scores
+			int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - skillBarValue));
+			print("hitbar score: " + hitbarscore);
+			logicScript.AddToHighScore(hitbarscore);
+			
+			Vector3 pushDir = new Vector3(vox, voy, voz);
+			body.velocity = pushDir;
+		}      */
+	}
 
-            //HS2: add hand accuracy scores
-            int accuscore = scoreBaseAdditionForHit - (int)(Mathf.Abs(distFromHandCenter * distortFactor));
-            print("accu score: " + accuscore);
-            logicScript.AddToHighScore(accuscore); //TODO ARHAN change
-
-            //HS3: add hitbar accuracy scores
-            int hitbarscore = scoreBaseAdditionForBarAccuracy + (int)(scoreBaseAdditionForHit * (1.0f - skillBarValue));
-            print("hitbar score: " + hitbarscore);
-            logicScript.AddToHighScore(hitbarscore);
-
-            Vector3 pushDir = new Vector3(vox, voy, voz);
-            body.velocity = pushDir;
-        }       
-    }
-
-    public void ResetDuration() {
-        duration = startDuration;
-    }
+	
+	public void ResetDuration() {
+		duration = startDuration;
+	}
 }

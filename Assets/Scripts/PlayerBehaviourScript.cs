@@ -13,35 +13,46 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	float time_since_move_start;
     bool moving_left, moving_right;
     float move_speed;
-	//float hit_start;
-	//bool hitting;
+	float hit_start;
+	bool hitting;
 	Vector3 initial_pos;
 	
+	Quaternion initial_left_rotation;
+	Quaternion initial_right_rotation;
+
+
 	BallBehaviour ballBehaviour;
 
 	void Start () {
         logic = GameObject.FindWithTag("Logic");
 		initial_pos = transform.position;
 		ballBehaviour = GameObject.Find ("BallPrefab").GetComponent<BallBehaviour> ();
+		initial_left_rotation = transform.FindChild ("left_arm").rotation;
+		initial_right_rotation = transform.FindChild ("right_arm").rotation;
 		reset ();
 	}
 
 	public void reset(){
+		transform.FindChild ("left_arm").rotation = initial_left_rotation;
+		transform.FindChild ("right_arm").rotation = initial_right_rotation;
+
 		transform.position = initial_pos;
 		moving_left = false;
 		moving_right = false;
 		move_speed = 0.0f;
-		//hit_start = 0.0f;
-		//hitting = false;
+		hit_start = 0.0f;
+		hitting = false;
 		time_since_move_start = 0.0f;
 	}
 
-    public void ResetPosition() {
-        transform.position = initial_pos;
-    }
+	
+	public void StartHitAnim() {
+		hitting = true;
+		hit_start = 0.0f;
+	}
 
 	void Update () {
-		if(logic.GetComponent<LogicScript>().GameIsOn()){
+		if(logic.GetComponent<LogicScript>().GameIsOn() || true){
 	        if (Input.GetKey(playerMoveLeft))
 	        {
 	            if (!moving_left)
@@ -73,8 +84,6 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				if(logic.GetComponent<LogicScript>().getCurrentPlayer() == playerCode){
 					logic.GetComponent<LogicScript>().StopBar();
 				}
-	            //hitting = true;
-	            //hit_start = 0.0f;
 	        }
 
 			if (moving_left && moving_right) 
@@ -110,49 +119,48 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				x = Mathf.Clamp(x, -maxMovementSpeed, maxMovementSpeed);
 				transform.position = new Vector3(x, transform.position.y, transform.position.z);
 			}
+
+			bool reversed = playerCode != 1;
+
+	        float a = (reversed ? -1.0f : 1.0f) * Mathf.Clamp (x / 10.0f, -1.0f, 1.0f);
+	        a = Mathf.Sign (a) * Mathf.Pow (Mathf.Abs (a), 1.0f);
 			
-	        //float a = (reversed ? -1.0f : 1.0f) * Mathf.Clamp (x / 10.0f, -1.0f, 1.0f);
-	        //a = Mathf.Sign (a) * Mathf.Pow (Mathf.Abs (a), 2.0f);
-			
-	        //float left_angle, right_angle;
-	        //if (a < 0) 
-	        //{
-	        //    left_angle = a * 20.0f;
-	        //    right_angle = a * 5.0f;
-	        //} 
-	        //else 
-	        //{
-	        //    left_angle = a * 5.0f;
-	        //    right_angle = a * 20.0f;
-	        //}
-
-	        //Quaternion hit_quaternion = Quaternion.identity;
-	        //if (hitting) 
-	        //{
-	        //    hit_start += Time.deltaTime*8;
-	        //    if(hit_start >= 2.0f)
-	        //    {
-	        //        hitting = false;
-	        //    }
-	        //    else
-	        //    {
-	        //        float ang = 0.0f;
-	        //        if (hit_start < 1.0f)
-	        //        {
-	        //            ang = (reversed?-1.0f:1.0f)*30.0f * (hit_start);
-	        //        }
-	        //        else
-	        //        {
-	        //            ang = (reversed?-1.0f:1.0f)*30.0f * (2.0f-hit_start);
-	        //        }
-	        //        hit_quaternion = Quaternion.AngleAxis(ang, Vector3.left);
-	        //    }
-	        //}
-
-
+	        float left_angle, right_angle;
+	        if (a < 0) 
+	        {
+	            left_angle = a * 5.0f;
+	            right_angle = a * 15.0f;
+	        } 
+	        else 
+	        {
+	            left_angle = a * 15.0f;
+	            right_angle = a * 5.0f;
+	        }
+	        Quaternion hit_quaternion = Quaternion.identity;
+	        if (hitting) 
+	        {
+	            hit_start += Time.deltaTime*8;
+	            if(hit_start >= 2.0f)
+	            {
+	                hitting = false;
+	            }
+	            else
+	            {
+	                float ang = 0.0f;
+	                if (hit_start < 1.0f)
+	                {
+	                    ang = (reversed?-1.0f:1.0f)*30.0f * (hit_start);
+	                }
+	                else
+	                {
+	                    ang = (reversed?-1.0f:1.0f)*30.0f * (2.0f-hit_start);
+	                }
+	                hit_quaternion = Quaternion.AngleAxis(ang, Vector3.left);
+	            }
+	        }
 	        
-	        //transform.FindChild ("left_arm").rotation = hit_quaternion * Quaternion.AngleAxis(left_angle, Vector3.up) * transform.rotation;
-	        //transform.FindChild ("right_arm").rotation = hit_quaternion * Quaternion.AngleAxis(right_angle, Vector3.up) * transform.rotation;
+	        transform.FindChild ("left_arm").rotation = hit_quaternion * Quaternion.AngleAxis(left_angle, Vector3.up) * initial_left_rotation;
+			transform.FindChild ("right_arm").rotation = hit_quaternion * Quaternion.AngleAxis(right_angle, Vector3.up) * initial_right_rotation;
 		
 		}
 	}
