@@ -4632,6 +4632,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 22434500, guid: aff507a054850f8449e5252cd1b97020, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 22434500, guid: aff507a054850f8449e5252cd1b97020, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 22434500, guid: aff507a054850f8449e5252cd1b97020, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2392712, guid: aff507a054850f8449e5252cd1b97020, type: 2}
       propertyPath: m_Enabled
       value: 0
