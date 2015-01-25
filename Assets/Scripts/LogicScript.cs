@@ -6,7 +6,7 @@ public class LogicScript : MonoBehaviour
 {
     static int numLives = 3;
     static int comboMultiLimit = 10;
-    GameObject mainCamera, uiCamera, helpCamera;
+    GameObject mainCamera, uiCamera, helpCamera, creditCamera;
     GameObject leftGuy, rightGuy;
     GameObject ballOfSteel;
     BallBehaviour ballBehaviourScript;
@@ -44,6 +44,7 @@ public class LogicScript : MonoBehaviour
         mainCamera = GameObject.FindWithTag("MainCamera");
         uiCamera = GameObject.FindWithTag("UICamera");
         helpCamera = GameObject.FindWithTag("HelpCamera");
+        creditCamera = GameObject.FindWithTag("CreditCamera");
 
 	    mainCamera.transform.rotation = Quaternion.LookRotation (-Vector3.up, Vector3.forward);
         remainingLives = numLives;
@@ -235,6 +236,7 @@ public class LogicScript : MonoBehaviour
         // Switch to UI Camera, game mode off
 		helpCamera.SetActive(false);
         mainCamera.SetActive(false);
+		creditCamera.SetActive(false);
 		uiCamera.SetActive(true);
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
     }
@@ -244,6 +246,7 @@ public class LogicScript : MonoBehaviour
         // Switch to UI Camera, game mode off
 		helpCamera.SetActive(false);
         uiCamera.SetActive(false);
+		creditCamera.SetActive(false);
 		mainCamera.SetActive(true);
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = true;
     }
@@ -280,10 +283,20 @@ public class LogicScript : MonoBehaviour
 
 	}
 
+    public void SwitchToCreditCamera()
+    {
+		mainCamera.SetActive(false);
+		uiCamera.SetActive(false);
+		helpCamera.SetActive(false);
+		creditCamera.SetActive(true);
+		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
+    }
+
     public void SwitchToHelpCamera()
     {
 		mainCamera.SetActive(false);
 		uiCamera.SetActive(false);
+		creditCamera.SetActive(false);
 		helpCamera.SetActive(true);
 		GameObject.FindWithTag ("GameUI").GetComponent<Canvas>().enabled = false;
     }
