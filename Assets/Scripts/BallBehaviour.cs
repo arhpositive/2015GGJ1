@@ -4,31 +4,57 @@ using System.Collections;
 public class BallBehaviour : MonoBehaviour {
     GameObject leftGuy;
     GameObject rightGuy;
-	public Vector3 initial_pos;
-	GameObject logic;
+    LogicScript logicScript;
     Component[] transforms;
+    Quaternion currentRot;
+    Vector3 rotateAxis;
+    Quaternion goalRot;
+    public static float rotSpeed = 0.1f;
+    bool isRotating;
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "sceneBounds") {
-			transform.position = initial_pos;
 			rigidbody.velocity = Vector3.zero;
-			logic.GetComponent <LogicScript> ().OnDeath();
+            logicScript.OnDeath();
 		}
 	}
     
 	void Start () {
-		initial_pos = transform.position;
 		leftGuy = GameObject.FindGameObjectWithTag("leftGuy");
 		rightGuy = GameObject.FindGameObjectWithTag("rightGuy");
-        logic = GameObject.FindGameObjectWithTag("Logic");
+        logicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        currentRot = Quaternion.identity;
+        goalRot = Quaternion.identity;
+        isRotating = false;
+        rotateAxis = Vector3.zero;
 	}
 
 	// Update is called once per frame 
 	void Update () {
+        if (isRotating)
+        {
+            transform.Rotate(rotateAxis * Time.deltaTime, Space.World);
+        }        
 	}
+
+    public void setCurrentAndGoalRots()
+    {
+        isRotating = true;
+        float rotvecx = Random.Range(-1.0f, 1.0f);
+        float rotvecy = Random.Range(-1.0f, 1.0f);
+        float rotvecz = Random.Range(-1.0f, 1.0f);
+        rotateAxis = new Vector3(rotvecx, rotvecy, rotvecz);
+        rotateAxis.Normalize();
+    }
+
+    public void StopRotation()
+    {
+        isRotating = false;
+    }
 
     public void ResetBall()
     {
+        isRotating = false;
         gameObject.layer = 8; //reset to leftGuy;
 
         transforms = leftGuy.GetComponentsInChildren<Transform>();

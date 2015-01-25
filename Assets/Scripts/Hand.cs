@@ -14,6 +14,7 @@ public class Hand : MonoBehaviour {
     float durationLowLimit = 2.0f;
 
     LogicScript logicScript;
+    BallBehaviour ballBehaviourScript;
     public static float duration;
 
 	// Use this for initialization
@@ -21,6 +22,7 @@ public class Hand : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider>();
 		duration = startDuration;
         logicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        ballBehaviourScript = GameObject.FindGameObjectWithTag("BallOfSteel").GetComponent<BallBehaviour>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +51,8 @@ public class Hand : MonoBehaviour {
 
         if (!logicScript.isBarMoving())
         {
+            ballBehaviourScript.setCurrentAndGoalRots();
+
             logicScript.SwapPlayer();
 
             float skillBarValue = logicScript.getBarValue();
